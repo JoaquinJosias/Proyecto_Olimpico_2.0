@@ -1,4 +1,4 @@
-package com.olimpico.proyectoOlimpico.model;
+package com.olimpico.proyectoOlimpico.Enums;
 
 public enum TipoEstado {
     emitido,

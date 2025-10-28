@@ -1,5 +1,6 @@
 package com.olimpico.proyectoOlimpico.model;
 
+import com.olimpico.proyectoOlimpico.Enums.MetodoPago;
 import jakarta.persistence.*;
 import lombok.Data;
 

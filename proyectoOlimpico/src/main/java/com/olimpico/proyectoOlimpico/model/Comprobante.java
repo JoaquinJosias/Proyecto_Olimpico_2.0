@@ -1,11 +1,13 @@
 package com.olimpico.proyectoOlimpico.model;
 
 
+import com.olimpico.proyectoOlimpico.Enums.MetodoPago;
+import com.olimpico.proyectoOlimpico.Enums.TipoComprobante;
+import com.olimpico.proyectoOlimpico.Enums.TipoEstado;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
