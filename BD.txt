@@ -1,0 +1,260 @@
+create database db_olimpico;
+use db_olimpico;
+
+create table Cargo(
+	id_cargo varchar(10) primary key,
+    nombre_cargo varchar(100) not null,
+    estado varchar(20) not null default 'activo'
+	constraint chk_estado_cargo CHECK (estado IN ('activo','inactivo'))
+);
+
+create table Marca(
+	id_marca varchar(10) primary key,
+    nombre_marca varchar(100) not null,
+    estado varchar(20) not null default 'activo'
+    constraint chk_estado_marca check (estado in ('activo','inactivo'))
+);
+
+create table Familia(
+	id_familia varchar(10) primary key,
+    nombre_familia varchar(100) not null,
+    estado varchar(20) not null default 'activo'
+    constraint chk_estado_familia check (estado in ('activo','inactivo'))
+);
+
+
+create table Cliente(
+	id_cliente varchar(10) primary key,
+    nombre_cliente varchar(100) not null,
+    apellido_cliente varchar(100) not null,
+    tipo_documento varchar(20) not null, 
+    numero_documento varchar(20) unique,
+    telefono varchar(20),
+    direccion varchar(255),
+    estado varchar(20) not null default 'activo',
+    constraint chk_documento check(tipo_documento in('DNI','RUC')),
+    constraint chk_estado_cliente check (estado in ('activo','inactivo'))
+);
+
+create table Proveedor(
+	id_proveedor varchar(10) primary key,
+    razon_social varchar(200) not null,
+    nombre_comercial varchar(150),
+    ruc varchar(11) unique not null,
+    telefono varchar(20),
+    email varchar(100),
+    direccion varchar(100),
+    estado varchar(20) not null default 'activo',
+    constraint chk_estado_proovedor check (estado in('activo','inactivo'))
+);
+
+
+
+create table Rol(
+	id_rol varchar(10) primary key,
+    nombre_rol varchar(50) not null unique,
+    descripcion varchar(50) not null,
+    nivel_acceso int not null,
+    estado varchar(20) not null default 'activo',
+    constraint chck_estado_rol check (estado in('activo','inactivo'))
+);
+
+create table Permiso(
+	id_permiso varchar(10) primary key,
+    nombre_permiso varchar(100) not null,
+    codigo_permiso varchar(50) unique not null,
+    modulo varchar(50) not null
+);
+
+create table Empleado(
+	id_empleado varchar(10) primary key,
+    nombre_empleado varchar(100) not null,
+    apellido_empleado varchar(100) not null,
+    tipo_documento varchar(20) not null default 'DNI',
+    numero_documento varchar(20) not null unique,
+    telefono varchar(20),
+    email varchar(100) not null,
+    direccion varchar(100) not null,
+    id_cargo varchar(10) not null,
+    fecha_contratacion date not null,
+    estado varchar(20) not null default ('activo'),
+    foreign key (id_cargo) references Cargo(id_cargo),
+    constraint chck_estado_empleado check (estado in('activo','inactivo','suspendido'))
+);
+
+create table Producto(
+	id_producto varchar(10) primary key,
+    id_familia varchar(10) not null,
+    id_marca varchar(10) not null,
+    nombre_producto varchar(150) not null,
+    precio_venta decimal(10,2) not null,
+    costo_unitario decimal(10,2) not null,
+    stock_actual int default 0,
+    unidad_medida varchar(20) default 'unidad',
+    estado varchar(20) not null default('activo'),
+    foreign key(id_familia) references Familia(id_familia),
+    foreign key(id_marca) references Marca(id_marca),
+    constraint chck_estado_producto check (estado in('activo','inactivo'))
+);
+
+create table Rol_Permiso(
+	id_rol varchar(10) not null,
+    id_permiso varchar(10) not null,
+    fecha_asignacion timestamp default current_timestamp,
+    primary key(id_rol, id_permiso),
+    foreign key(id_rol) references Rol(id_rol) on delete cascade,
+    foreign key(id_permiso) references Permiso(id_permiso) on delete cascade
+);
+
+create table Usuario(
+	id_usuario varchar(10) primary key,
+    username varchar(50) not null,
+    password_hash varchar(255) not null,
+    email varchar(100) unique,
+    id_empleado varchar(10) ,
+    id_cliente varchar(10) ,
+    id_rol varchar(10) ,
+    estado varchar(20) not null default('activo'),
+    fecha_creacion timestamp default current_timestamp,
+    foreign key(id_empleado) references Empleado(id_empleado),
+    foreign key(id_cliente) references Cliente(id_cliente),
+    foreign key(id_rol) references Rol(id_rol),
+    constraint chck_estado_usuario check (estado in('activo','inactivo'))
+);
+
+create table Inventario(
+	id_inventario varchar(10) primary key,
+    id_empleado varchar(10) not null,
+    fecha_inventario date not null,
+    foreign key(id_empleado) references Empleado(id_empleado)
+);
+
+
+
+create table Pedido(
+	id_pedido varchar(10) primary key,
+    id_cliente varchar(10) not null,
+    tipo_comprobante varchar(50) not null,
+    tipo_entrega varchar(50) not null,
+    direccion_entrega varchar(255),
+    estado_pedido varchar(50) not null,
+    subtotal decimal(10,2) not null,
+    igv decimal(10,2) not null,
+    total decimal(10,2) not null,
+    observaciones varchar(255) not null,
+    foreign key(id_cliente) references Cliente(id_cliente),
+    constraint chck_comprobante check(tipo_comprobante in('boleta','factura')),
+    constraint chck_entrega check(tipo_entrega in('delivery','recoger')),
+    constraint chck_pedido check(estado_pedido in('pendiente','entregado','cancelado'))
+);
+
+create table Compra(
+	id_compra varchar(10) primary key,
+    id_proveedor varchar(10) not null,
+    numero_comprobante varchar(50) not null,
+    tipo_comprobante varchar(50) not null,
+    fecha_compra date not null,
+    subtotal decimal(10,2) not null,
+    igv decimal(10,2) not null,
+    total decimal(10,2) not null,
+    estado_compra varchar(50) not null,
+    observaciones varchar(255) not null,
+    foreign key(id_proveedor) references Proveedor(id_proveedor),
+    constraint chck_compra check (estado_compra in('pendiente','recibido','cancelado'))
+);
+
+create table Det_Inve_Prod(
+	id_producto varchar(10) not null,
+    id_inventario varchar(10) not null,
+    medida_unidad varchar(60) not null,
+    cantidad int not null,
+    costo_unitario decimal(10,2) not null,
+    valor_inventario DECIMAL(10,2) GENERATED ALWAYS AS (cantidad * costo_unitario) STORED,
+    fecha_vencimiento date not null,
+    lote varchar(50),
+    primary key(id_producto, id_inventario),
+    foreign key(id_producto) references Producto(id_producto),
+    foreign key(id_inventario) references Inventario(id_inventario)
+);
+
+create table Det_Pedido(
+	id_detalle varchar(10) primary key,
+    id_pedido varchar(10) not null,
+    id_producto varchar(10) not null,
+    cantidad int not null,
+    precio_unitario decimal(10,2) not null,
+    subtotal decimal(10,2) not null,
+    observaciones varchar(255),
+    foreign key(id_pedido) references Pedido(id_pedido),
+    foreign key(id_producto) references Producto(id_producto)
+);
+
+CREATE TABLE Det_Compra (
+    id_detalle varchar(10) primary key,
+    id_compra varchar(10),
+    id_producto varchar(10),
+    cantidad int not null,
+    precio_unitario decimal(10,2) not null,
+    subtotal decimal(10,2) not null,
+    fecha_vencimiento date,
+    lote varchar(50),
+    FOREIGN KEY (id_compra) REFERENCES Compra(id_compra),
+    FOREIGN KEY (id_producto) REFERENCES Producto(id_producto)
+) ;
+
+CREATE TABLE Comprobante (
+    id_comprobante varchar(10) primary key,
+    id_pedido varchar(10) not null,
+    tipo_comprobante ENUM('boleta', 'factura') NOT NULL,
+    fecha_emision TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    subtotal decimal(10,2) not null,
+    igv decimal(10,2) not null,
+    total decimal(10,2) not null,
+    metodo_pago varchar(50) not null,
+    estado ENUM('emitido', 'anulado') DEFAULT 'emitido',
+    observaciones TEXT,
+    FOREIGN KEY (id_pedido) REFERENCES Pedido(id_pedido)
+);
+
+
+CREATE TABLE Pago_Proveedor (
+    id_pago varchar(10) primary key,
+    id_compra varchar(10) not null,
+    fecha_pago DATE NOT NULL,
+    monto_pago DECIMAL(10,2) NOT NULL,
+    metodo_pago ENUM('BCP', 'BBVA', 'YAPE', 'PLIN'),
+    observaciones varchar(255) not null,
+    fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_compra) REFERENCES Compra(id_compra)
+);
+
+
+CREATE TABLE Carrito (
+    id_carrito VARCHAR(10) PRIMARY KEY,
+    id_cliente VARCHAR(10) NOT NULL,
+    estado VARCHAR(20) DEFAULT 'activo',
+    FOREIGN KEY (id_cliente) REFERENCES Cliente(id_cliente),
+    CONSTRAINT chk_estado_carrito CHECK (estado IN ('activo', 'procesado', 'cancelado'))
+);
+
+
+CREATE TABLE Det_Carrito (
+    id_detalle VARCHAR(10) PRIMARY KEY,
+    id_carrito VARCHAR(10) NOT NULL,
+    id_producto VARCHAR(10) NOT NULL,
+    cantidad INT NOT NULL,
+    precio_unitario DECIMAL(10,2) NOT NULL,
+    subtotal DECIMAL(10,2) GENERATED ALWAYS AS (cantidad * precio_unitario) STORED,
+    FOREIGN KEY (id_carrito) REFERENCES Carrito(id_carrito),
+    FOREIGN KEY (id_producto) REFERENCES Producto(id_producto)
+);
+
+
+
+CREATE TABLE usuario_rol (
+  id_usuario VARCHAR(10),
+  id_rol VARCHAR(10),
+  PRIMARY KEY (id_usuario, id_rol),
+  FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario),
+  FOREIGN KEY (id_rol) REFERENCES rol(id_rol)
+);
