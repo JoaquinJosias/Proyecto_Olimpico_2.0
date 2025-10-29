@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestra Carta - El Olímpico</title>
+    <link rel="stylesheet" href="/css/carta.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="brand">
+            <img src="/img/logo-olimpico.png"class="logo-img">
+            <h1 class="titulo">EL OLIMPICO</h1>
+        </div>
+        <div class="Menu_opciones">
+        <nav class="navigation">
+            <a th:href="@{/carta}">Nuestra Carta</a>
+            <a th:href="@{/promociones}">Promociones</a>
+            <a th:href="@{/reserva}">Reserva</a>
+            <a th:href="@{/sobre_nosotros}">Sobre Nosotros</a>
+            <a th:href="@{/ubicacion}">Ubicacion</a>
+            <button class="btnLogin">Login</button>   
+        </nav>
+        </div>
+        </header>
+    <section id="Arroces Marinos" class="categoria">
+        <h2>Arroces Marinos</h2>
+        <div class="grid-platos">
+          <div class="plato">
+            <img src="/img/Img Carta Web/Arroces Marinos/Arroz con Mariscos.jpg" alt="Arroz con Mariscos">
+            <h3>Arroz con Mariscos</h3>
+            <p>Arroz salteado con mariscos, aji amarillo,  y un toque de cilantro</p>
+            <span class="Precio">S/. 30.00 </span>
+              <div class="acciones">
+                <button class="agregar">+</button>
+                <span class="cantidad">0</span>
+                <button class="eliminar">-</button>
+             </div>
+        </div>
+        <div class="plato">
+            <img src="/img/Img Carta Web/Arroces Marinos/Chaufa de Marisco.jpg" alt="Chaufa de Mariscos">
+            <h3>Chaufa de Mariscos</h3>
+            <p>Arroz chaufa con mariscos, salsa de Soya y cebolla china</p>
+            <span class="Precio">S/. 23.00</span>
+            <div class="acciones">
+                <button class="agregar">+</button>
+                <span class="cantidad">0</span>
+                <button class="eliminar">-</button>
+             </div>
+        </div>
+        <div class="plato">
+            <img src="/img/Img Carta Web/Arroces Marinos/Chaufa de Pescado.jpg" alt="Chaufa de Pescado">
+            <h3>Chaufa de Pescado</h3>
+            <p>Arroz Chaufa con trozos de Pescados y un toque oriental</p>
+            <span class="Precio">S/. 25.00</span>
+            <div class="acciones">
+                
+                <button class="agregar">+</button>
+                <span class="cantidad">0</span>
+                <button class="eliminar">-</button>
+             </div>
+        </div>
+    </div>
+    
+    </section>
+    <section id="Ceviches" class="categoria">
+        <h2>Ceviches en sus variedades</h2>
+        <div class="grid-platos">
+            <div class="plato">
+                <img src="/img/Img Carta Web/Ceviches en sus variedades/Cebiche de Pescado.jpg" alt="Ceviche de Pescado">
+                <h3>Ceviche de Pescado</h3>
+                <p>Ceviche de Pescado fresco del día</p>
+                <span class="Precio">S/. 19.90</span>
+                <div class="acciones">
+                    <button class="agregar">+</button>
+                    <span class="cantidad">0</span>
+                    <button class="eliminar">-</button>
+                </div>
+            </div>
+            <div class="plato">
+            <img src="../img/Img Carta Web/Ceviches en sus variedades/Cebiche Mixto.jpg0" alt="Ceviche Mixto">
+            <h3>Ceviche Mixto</h3>
+            <p>La gran combinación de ceviche, mariscos y cebolla morada en jugo de limón</p>
+            <span class="Precio">S/. 32.50</span>
+            <div class="acciones">
+                <button class="agregar">+</button>
+                <span class="cantidad">0</span>
+                <button class="eliminar">-</button>
+            </div>
+        </div>
+        <div class="plato">
+            <img src="../img/Img Carta Web/Ceviches en sus variedades/Tiradito de Pescado.jpg" alt="Tiradito de Pescado">
+            <h3>Tiradito de Pescado</h3>
+            <p>Láminas de Pescado bañado en crema de ají amarillo y especias</p>
+            <span class="Precio">S/. 19.90</span>
+            <div class="acciones">
+                <button class="agregar">+</button>
+                <span class="cantidad">0</span>
+                <button class="eliminar">-</button>
+            </div>
+        </div>
+        </section>
+
+    <section id="Chicharrones y Jaleas" class="categoria">
+        <h2>Chicharrones y Jaleas</h2>
+        <div class="grid-platos">
+            <div class="plato">
+                <img src="/img/Img Carta Web/Chicharrones y Jaleas/Chicarron de Calamar.jpg" alt="Chicharon de Calamar">
+                <h3>Chicarron de Calamar</h3>
+                <p>Trozo de Calamar acompañado con yuca y cebolla</p>
+                <span class="Precio">S/. 22.00</span>
+                <div class="acciones">
+                    <button class="agregar">+</button>
+                    <span class="cantidad">0</span>
+                    <button class="eliminar">-</button>
+                </div>
+            </div>
+            <div class="plato">
+                <img src="../img/Img Carta Web/Chicharrones y Jaleas/Chicharron de Huevera.jpg" alt="Chicharon de Huevera">
+                <h3>Chicarron de Huevera</h3>
+                <p>Huevera crocante acompañado con yuca y ensalada de cebolla</p>
+                <span class="Precio">S/. 17.00</span>
+                <div class="acciones">
+                    <button class="agregar">+</button>
+                    <span class="cantidad">0</span>
+                    <button class="eliminar">-</button>
+                </div>
+            </div>
+            <div class="plato">
+                <img src="../img/Img Carta Web/Chicharrones y Jaleas/Chicharron de Pescado.jpg" alt="Chicarron de Pescado">
+                <h3>Chicarron de Pescado</h3>
+                <p>Chicharron de Pescaso acompañado con yuca y ensalada de cebolla</p>
+                <span class="Precio">S/. 20.00</span>
+                <div class="acciones">
+                    <button class="agregar">+</button>
+                    <span class="cantidad">0</span>
+                    <button class="eliminar">-</button>
+                </div>
+            </div>
+            <div class="plato">
+                <img src="../img/Img Carta Web/Chicharrones y Jaleas/Chicharron Mixto.jpg" alt="Chicarron Mixto">
+                <h3>Chicharron Mixto</h3>
+                <p>Gran Combinacion de Chicharon de pescado,huevera y calamar con salsa criolla </p>
+                <span class="Precio">S/.26.00</span>
+                <div class="acciones">
+                    <button class="agregar">+</button>
+                    <span class="cantidad">0</span>
+                    <button class="eliminar">-</button>
+                </div>
+            </div>
+             <div class="plato">
+                <img src="../img/Img Carta Web/Chicharrones y Jaleas/Jalea Mixta.jpg" alt="Jalea Mixta">
+                <h3>Jalea Mixta</h3>
+                <p>Gran Combinacion de Jalea con salsa criolla langostinos y conchas</p>
+                <span class="Precio">S/.32.00</span>
+                <div class="acciones">
+                    <button class="agregar">+</button>
+                    <span class="cantidad">0</span>
+                    <button class="eliminar">-</button>
+                </div>
+            </div>
+            <div class="plato">
+                <img src="../img/Img Carta Web/Chicharrones y Jaleas/Jalea Olimpica.png" alt="Jalea Olimpica">
+                <h3>Jalea Olimpica</h3>
+                <p>Gran Combinacion de Jalea con salsa criolla langostinos y conchas</p>
+                <span class="Precio">S/.35.00</span>
+                <div class="acciones">
+                    <button class="agregar">+</button>
+                    <span class="cantidad">0</span>
+                    <button class="eliminar">-</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="Pescados Fritos" class="categoria">
+        <h2>Pescados Fritos</h2>
+        <div class="grid-platos">
+            <div class="plato">
+                <img src="../img/Img Carta Web/Pescados Fritos/Cabrilla Frita.jpg" alt="Cabrilla Frita">
+                <h3>Cabrilla Frita</h3>
+                <p>Filete de Cabrilla acompañado con cebolla y papa</p>
+                <span class="Precio">S/. 15.00</span>
+                <div class="acciones">
+                    <button class="agregar">+</button>
+                    <span class="cantidad">0</span>
+                    <button class="eliminar">-</button>
+                </div>
+            </div>
+            <div class="plato">
+                <img src="../img/Img Carta Web/Pescados Fritos/Chita Frtita.jpg" alt="Chita Frita">
+                <h3>Chita Frita</h3>
+                <p>Chita crocante y suave con extra cebolla</p>
+                <span class="Precio">S/. 15.00</span>
+                <div class="acciones">
+                    <button class="agregar">+</button>
+                    <span class="cantidad">0</span>
+                    <button class="eliminar">-</button>
+                </div>
+            </div>
+            <div class="plato">
+                <img src="../img/Img Carta Web/Pescados Fritos/Pescado frito en Filete.jpg" alt="Pecado Frito en Filete">
+                <h3>Pescado Frito en Filete</h3>
+                <p>Filete de pescado frito con papa y cebolla</p>
+                <span class="Precio">S/. 15.00</span>
+                <div class="acciones">
+                    <button class="agregar">+</button>
+                    <span class="cantidad">0</span>
+                    <button class="eliminar">-</button>
+                </div>
+            </div>
+            <div class="plato">
+                <img src="../img/Img Carta Web/Pescados Fritos/Trucha Frita.jpg" alt="Trucha Frita">
+                <h3>Trucha Frita</h3>
+                <p>Trucha Frita con papa y cebolla</p>
+                <span class="Precio">S/. 15.00</span>
+                <div class="acciones">
+                    <button class="agregar">+</button>
+                    <span class="cantidad">0</span>x    
+                    <button class="eliminar">-</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="Platos Criollos" class="categoria">
+        <h2>Platos Criollos</h2>
+        <div class="grid-platos">
+            <div class="plato">
+                <img src="../img/Img Carta Web/Platos Criollos/Bistec a lo Pobre.jpg" alt="Bistec a lo Pobre">
+                <h3>Bistec a lo Pobre</h3>
+                <p>Bistec con papas  fritas, arroz y tomates </p>
+                <span class="Precio">S/. 14.00</span>
+                <div class="acciones">
+                    <button class="agregar">+</button>
+                    <span class="cantidad">0</span>
+                    <button class="eliminar">-</button>
+                </div>
+            </div>
+            <div class="plato">
+                <img src="../img/Img Carta Web/Platos Criollos/Chaufa de Pollo.jpg" alt="Chaufa de Pollo">
+                <h3>Chaufa de Pollo</h3>
+                <p>Arroz chaufa acompañado con pequeños trozos de pollo</p>
+                <span class="Precio">S/. 15.00</span>
+                <div class="acciones">
+                    <button class="agregar">+</button>
+                    <span class="cantidad">0</span>
+                    <button class="eliminar">-</button>
+                </div>
+            </div>
+            <div class="plato">
+                <img src="../img/Img Carta Web/Platos Criollos/Lomo Saltada.jpg" alt="Lomo Saltado">
+                <h3>Lomo Saltado</h3>
+                <p>Lomo con aderezo y papas fritas</p>
+                <span class="Precio">S/. 15.00</span>
+                <div class="acciones">
+                    <button class="agregar">+</button>
+                    <span class="cantidad">0</span>
+                    <button class="eliminar">-</button>
+                </div>
+            </div>
+            <div class="plato">
+                <img src="../img/Img Carta Web/Platos Criollos/Tallarin Saltado.jpg" alt="Tallarrin Saltado">
+                <h3>Tallarrin Saltado</h3>
+                <p>Tallarin Saltado con Lomo</p>
+                <span class="Precio">S/. 15.00</span>
+                <div class="acciones">
+                    <button class="agregar">+</button>
+                    <span class="cantidad">0</span>
+                    <button class="eliminar">-</button>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <section id="Platos Típicos" class="categoria">
+        <h2>Platos Típicos</h2>
+        <div class="grid-platos">
+            <div class="plato">
+                <img src="../img/Img Carta Web/Platos Tipicos/Arroz con Pato.jpg" alt="Arroz con Pato">
+                <h3>Arroz con Pato</h3>
+                <p>Arroz con pato extra espinaca Presa grande </p>
+                <span class="Precio">S/. 20.00</span>
+                <div class="acciones">
+                    <button class="agregar">+</button>
+                    <span class="cantidad">0</span>
+                    <button class="eliminar">-</button>
+                </div>
+            </div>
+            <div class="plato">
+                <img src="../img/Img Carta Web/Platos Tipicos/Chaufa Choripada.jpg" alt="Chaufa Choripada">
+                <h3>Chaufa Choripada</h3>
+                <p>Chaufa con trozos de chorizo </p>
+                <span class="Precio">S/. 20.00</span>
+                <div class="acciones">
+                    <button class="agregar">+</button>
+                    <span class="cantidad">0</span>
+                    <button class="eliminar">-</button>
+                </div>
+            </div>
+            <div class="plato">
+                <img src="../img/Img Carta Web/Platos Tipicos/Costillar Dorado.jpg" alt="Costillar Dorada">
+                <h3>Costillar Dorada</h3>
+                <p>Cordero crocante Arequipeño</p>
+                <span class="Precio">S/. 20.00</span>
+                <div class="acciones">
+                    <button class="agregar">+</button>
+                    <span class="cantidad">0</span>
+                    <button class="eliminar">-</button>
+                </div>
+            </div>
+            <div class="plato">
+                <img src="../img/Img Carta Web/Platos Tipicos/Cuy Picante.jpg" alt="Cuy Picante">
+                <h3>Cuy Picante</h3>
+                <p>Cuy con aderezo picante con papa</p>
+                <span class="Precio">S/. 20.00</span>
+                <div class="acciones">
+                    <button class="agregar">+</button>
+                    <span class="cantidad">0</span>
+                    <button class="eliminar">-</button>
+                </div>
+            </div>
+            <div class="plato">
+                <img src="../img/Img Carta Web/Platos Tipicos/Seco de Cabrito.jpg" alt="Seco de Cabrito">
+                <h3>Seco de Cabrito</h3>
+                <p>Seco de cabrito bien aderezado con papas y acompañado de frijoles</p>
+                <span class="Precio">S/. 14.00</span>
+                <div class="acciones">
+                    <button class="agregar">+</button>
+                    <span class="cantidad">0</span>
+                    <button class="eliminar">-</button>
+                </div>
+            </div>
+             <div class="plato">
+                <img src="../img/Img Carta Web/Platos Tipicos/Tacacho con Cecina.jpg" alt="Tacacho de Cecina">
+                <h3>Tacacho de Cecina</h3>
+                <p>Bolas de Tacacho con un trozo de Cecina</p>
+                <span class="Precio">S/. 10.00</span>
+                <div class="acciones">
+                    <button class="agregar">+</button>
+                    <span class="cantidad">0</span>
+                    <button class="eliminar">-</button>
+                </div>
+            </div>    
+        </div>
+
+    </section>
+    <section id="Rondas Marinas" class="categoria">
+        <h2>Rondas Marinas</h2>
+        <div class="grid-platos">
+            <div class="plato">
+                <img src="../img/Img Carta Web/Rondas Marinas/Cebiche con chicharron de Huevera.jpg" alt="Ceviche con chicharron de Huevera">
+                <h3>Ceviche con chicharron de Huevera</h3>
+                <p>Ceviche con una buena porción de Huevera y cebolla</p>
+                <span class="Precio">S/. 25.00</span>
+                <div class="acciones">
+                    <button class="agregar">+</button>
+                    <span class="cantidad">0</span>
+                    <button class="eliminar">-</button>
+                </div>
+            </div>
+            <div class="plato">
+                <img src="../img/Img Carta Web/Rondas Marinas/Cebiche con Chicharron de Pescado.jpg" alt="Ceviche con chicharron de Pescado">
+                <h3>Ceviche con chicharron de Pescado</h3>
+                <p>Ceviche con una buena porción de Pescado y cebolla</p>
+                <span class="Precio">S/. 25.00</span>
+                <div class="acciones">
+                    <button class="agregar">+</button>
+                    <span class="cantidad">0</span>
+                    <button class="eliminar">-</button>
+                </div>
+            </div>
+            <div class="plato">
+                <img src="../img/Img Carta Web/Rondas Marinas/Cebiche con Marisco.jpg" alt="Ceviche con Mariscos">
+                <h3>Ceviche con Mariscos</h3>
+                <p>Ceviche con una buena porción Mariscos</p>
+                <span class="Precio">S/. 26.00</span>
+                <div class="acciones">
+                    <button class="agregar">+</button>
+                    <span class="cantidad">0</span>
+                    <button class="eliminar">-</button>
+                </div>
+            </div>
+            <div class="plato">
+                <img src="../img/Img Carta Web/Rondas Marinas/Cebiche+Arroz con mariscos+Chicharron de Pescado.jpg" alt="Ceviche + Arroz con Mariscos + Chicharron de Pescado">
+                <h3>Ceviche + Arroz con Mariscos + Chicharron de Pescado</h3>
+                <p>Una Gran Ronda, incluye cremas y canchita </p>
+                <span class="Precio">S/. 26.00</span>
+                <div class="acciones">
+                    <button class="agregar">+</button>
+                    <span class="cantidad">0</span>
+                    <button class="eliminar">-</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section  id="Entradas" class="categoria">
+        <h2>Entradas</h2>
+        <div class="grid-platos">
+            <div class="plato">
+                <img src="../img/Img Carta Web/Entradas/Causa rellena con pulpa de cangrejo.jpg" alt="Causa  rellena con Pulpa de Cangrejo">
+                <h3>Causa rellena con pulpa de Cangrejo</h3>
+                <p>Deliciosa causa con extra pulpa</p>
+                <span class="Precio">S/. 19.90</span>
+                <div class="acciones">
+                <button class="agregar">+</button>
+                <span class="cantidad">0</span>
+                <button class="eliminar">-</button>
+            </div>
+        </div>
+        <div class="plato">
+            <img src="../img/Img Carta Web/Entradas/Leche de Pantera.jpg" alt="Leche de Pantera">
+            <h3>Leche de pantera</h3>
+            <p>Leche de pantera con algas</p>
+            <span class="Precio">S/. 17.90</span>
+            <div class="acciones">
+                <button class="agregar">+</button>
+                <span class="cantidad">0</span>
+                <button class="eliminar">-</button>
+            </div>
+        </div>
+        <div class="plato">
+            <img src="../img/Img Carta Web/Entradas/Leche de Tigre.jpg" alt="Leche de Tigre">
+            <h3>Leche de Tigre</h3>
+            <p>Leche de Tigre con una pequeña porcion de Ceviche con yuca Frita</p>
+            <span class="Precio">S/. 15.90</span>
+            <div class="acciones">
+                <button class="agregar">+</button>
+                <span class="cantidad">0</span>
+                <button class="eliminar">-</button>
+                </div>
+            </div>
+        <div class="plato">
+            <img src="../img/Img Carta Web/Entradas/Tequeños con pulpa de pulpa de Cangrejo.jpg" alt="Tequeños con Pulpa de Cangrejo">
+            <h3>Tequeños con Pulpa de Cangrejo</h3>
+            <p>Tequeños acompañado con su crema</p>
+            <span class="Precio">S/. 2.90</span>
+            <div class="acciones">
+                <button class="agregar">+</button>
+                <span class="cantidad">0</span>
+                <button class="eliminar">-</button>
+                </div>
+            </div> 
+        </div>
+        </section>
+        <section id="Sopas Marinas" class="categoria">
+            <h2>Sopas Marinas</h2>
+            <div class="grid-platos">
+                <div class="plato">
+                    <img src="../img/Img Carta Web/Sopas Marinas/Chupe de Camarones.jpg" alt="Chupe de Camarones">
+                    <h3>Chupe de Camarones</h3>
+                    <p>Gran trozo de Camarones con especias</p>
+                    <span class="Precio">S/. 17.90</span>
+                    <div class="acciones">
+                        <button class="agregar">+</button>
+                        <span class="cantidad">0</span>
+                        <button class="eliminar">-</button>
+                    </div>
+                </div>
+                <div class="plato">
+                    <img src="../img/Img Carta Web/Sopas Marinas/Sudado de Tramboyo.jpg" alt="Sudado de Tramboyo">
+                    <h3>Sudado de Tramboyo</h3>
+                    <p>Sudado con su yuca y especias (incluye limón)</p>
+                    <span class="Precio">S/. 18.90</span>
+                    <div class="acciones">
+                        <button class="agregar">+</button>
+                        <span class="cantidad">0</span>
+                        <button class="eliminar">-</button>
+                    </div>
+                </div>
+                <div class="plato">
+                    <img src="../img/Img Carta Web/Sopas Marinas/Sudado.jpg" alt="Sudado">
+                    <h3>Sudado</h3>
+                    <p>Sudado común pero con sus especias especiales</p>
+                    <span class="Precio">S/. 15.90</span>
+                    <div class="acciones">
+                        <button class="agregar">+</button>
+                        <span class="cantidad">0</span>
+                        <button class="eliminar">-</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="Bebidas" class="categoria">
+            <h2>Bebidas</h2>
+            <div class="subcategoria">
+                <h3>Bebidas </h3>
+                <div class="grid-platos">
+                <div class="plato">
+                    <img src="../img/Img Carta Web/Bebidas/Bebidas/Agua San Mateo Con Gas.webp" alt="Agua San Mateo Con Gas">
+                    <h4>Agua San Mateo Con Gas</h4>
+                    <span class="precio">S/. 2.50</span>
+                    <div class="acciones">
+                        <button class="agregar">+</button>
+                        <span class="cantidad">0</span>
+                        <button class="eliminar">-</button>
+                    </div>
+                </div>
+                <div class="plato">
+                    <img src="../img/Img Carta Web/Bebidas/Bebidas/Agua San Mateo Sin Gas.webp" alt="Agua San Mateo Sin Gas">
+                    <h4>Agua San Mateo Sin Gas</h4>
+                    <span class="precio">S/. 2.00</span>
+                    <div class="acciones">
+                        <button class="agregar">+</button>
+                        <span class="cantidad">0</span>
+                        <button class="eliminar">-</button>
+                    </div>
+                </div>
+                <div class="plato">
+                    <img src="../img/Img Carta Web/Bebidas/Bebidas/Coca Cola Original.webp" alt="Coca Cola">
+                    <h4>Coca Cola</h4>
+                    <span class="precio">S/. 11.50 3Lt</span>
+                    <div class="acciones">
+                        <button class="agregar">+</button>
+                        <span class="cantidad">0</span>
+                        <button class="eliminar">-</button>
+                    </div>
+                </div>
+                <div class="plato">
+                    <img src="../img/Img Carta Web/Bebidas/Bebidas/Coca Cola Sin Azucar.webp" alt="Coca Cola Sin Azúcar">
+                    <h4>Coca Cola Sin Azucar</h4>
+                    <span class="precio">S/. 2.50</span>
+                    <div class="acciones">
+                        <button class="agregar">+</button>
+                        <span class="cantidad">0</span>
+                        <button class="eliminar">-</button>
+                    </div>
+                </div>
+                <div class="plato">
+                    <img src="../img/Img Carta Web/Bebidas/Bebidas/Guarana.jpg" alt="Guarana">
+                    <h4>Guarana</h4>
+                    <span class="precio">S/. 8.50 3Lt</span>
+                    <div class="acciones">
+                        <button class="agregar">+</button>
+                        <span class="cantidad">0</span>
+                        <button class="eliminar">-</button>
+                    </div>
+                </div>
+                <div class="plato">
+                    <img src="../img/Img Carta Web/Bebidas/Bebidas/Inka Kola Sin Azucar.webp" alt="Inka Kola Sin Azúcar">
+                    <h4>Inka Kola Sin Azúcar</h4>
+                    <span class="precio">S/. 2.50</span>
+                    <div class="acciones">
+                        <button class="agregar">+</button>
+                        <span class="cantidad">0</span>
+                        <button class="eliminar">-</button>
+                    </div>
+                </div>
+                <div class="plato">
+                    <img src="../img/Img Carta Web/Bebidas/Bebidas/Inka Kola.webp" alt="Inka Kola">
+                    <h4>Inka Kola</h4>
+                    <span class="precio">S/. 12.50 Lt3</span>
+                    <div class="acciones">
+                        <button class="agregar">+</button>
+                        <span class="cantidad">0</span>
+                        <button class="eliminar">-</button>
+                    </div>
+                </div>
+                <div class="plato">
+                    <img src="../img/Img Carta Web/Bebidas/Bebidas/Inka Kola Sin Azucar.webp" alt="Inka Kola Sin Azúcar">
+                    <h4>Inka Kola Sin Azúcar</h4>
+                    <span class="precio">S/. 3.50</span>
+                    <div class="acciones">
+                        <button class="agregar">+</button>
+                        <span class="cantidad">0</span>
+                        <button class="eliminar">-</button>
+                    </div>
+                </div>
+                <div class="plato">
+                    <img src="../img/Img Carta Web/Bebidas/Bebidas/Carambola.jpg" alt="Carambola">
+                    <h4>Carambola</h4>
+                    <span class="precio">S/. 8.50</span>
+                    <div class="acciones">
+                        <button class="agregar">+</button>
+                        <span class="cantidad">0</span>
+                        <button class="eliminar">-</button>
+                    </div>
+                </div>
+                <div class="plato">
+                    <img src="../img/Img Carta Web/Bebidas/Bebidas/Chica Morada.jpg" alt="Chica Morada">
+                    <h4>Chicha morada</h4>
+                    <span class="precio">S/. 7.50</span>
+                    <div class="acciones">
+                        <button class="agregar">+</button>
+                        <span class="cantidad">0</span>
+                        <button class="eliminar">-</button>
+                    </div>
+                </div>
+                <div class="plato">
+                    <img src="../img/Img Carta Web/Bebidas/Bebidas/JUgo de Naranja.jpg" alt="Jugo de Naranja">
+                    <h4>Jugo de Naranja</h4>
+                    <span class="precio">S/. 6.50</span>
+                    <div class="acciones">
+                        <button class="agregar">+</button>
+                        <span class="cantidad">0</span>
+                        <button class="eliminar">-</button>
+                    </div>
+                </div>
+                <div class="plato">
+                    <img src="../img/Img Carta Web/Bebidas/Bebidas/Limonada.jpg" alt="Limonada">
+                    <h4>Limonada</h4>
+                    <span class="precio">S/. 5.50</span>
+                    <div class="acciones">
+                        <button class="agregar">+</button>
+                        <span class="cantidad">0</span>
+                        <button class="eliminar">-</button>
+                    </div>
+                </div>
+                <div class="plato">
+                    <img src="../img/Img Carta Web/Bebidas/Bebidas/Maracuya.jpg" alt="Maracuya">
+                    <h4>Maracuya</h4>
+                    <span class="precio">S/. 6.50</span>
+                    <div class="acciones">
+                        <button class="agregar">+</button>
+                        <span class="cantidad">0</span>
+                        <button class="eliminar">-</button>
+                    </div>
+                </div>
+                <div class="plato">
+                    <img src="../img/Img Carta Web/Bebidas/Bebidas/Refresco de Manzana.jpg" alt="Refresco de Manzana">
+                    <h4>Refresco de Manzana</h4>
+                    <span class="precio">S/. 4.50</span>
+                    <div class="acciones">
+                        <button class="agregar">+</button>
+                        <span class="cantidad">0</span>
+                        <button class="eliminar">-</button>
+                    </div>
+                </div>
+                <div class="plato">
+                    <img src="../img/Img Carta Web/Bebidas/Bebidas/Refresco de Piña.jpg" alt="Refresco de Piña">
+                    <h4>Refresco de Piña</h4>
+                    <span class="precio">S/. 9.00</span>
+                    <div class="acciones">
+                        <button class="agregar">+</button>
+                        <span class="cantidad">0</span>
+                        <button class="eliminar">-</button>
+                    </div>
+                </div>
+                </div>
+        </div>
+                <div class="subcategoria">
+                    <h3>Cervezas</h3>
+                    <div class="grid-platos">
+                     <div class="plato">
+                        <img src="../img/Img Carta Web/Bebidas/Cervezas/Corona.webp" alt="Cerveza Corona">
+                        <h4>Corona</h4>
+                        <span class="precio">S/. 8.00</span>
+                        <div class="acciones">
+                            <button class="agregar">+</button>
+                            <span class="cantidad">0</span>
+                            <button class="eliminar">-</button>
+                        </div>
+                    </div>
+                    <div class="plato">
+                        <img src="../img/Img Carta Web/Bebidas/Cervezas/Cristal.jpg" alt="Cerveza Cristal">
+                        <h4>Cristal</h4>
+                        <span class="precio">S/. 8.00</span>
+                        <div class="acciones">
+                            <button class="agregar">+</button>
+                            <span class="cantidad">0</span>
+                            <button class="eliminar">-</button>
+                        </div>
+                    </div>
+                    <div class="plato">
+                        <img src="../img/Img Carta Web/Bebidas/Cervezas/Cusqueña de Trigo.webp" alt="Cerveza Cusqueña de Trigo">
+                        <h4>Cusqueña de Trigo</h4>
+                        <span class="precio">S/. 9.00</span>
+                        <div class="acciones">
+                            <button class="agregar">+</button>
+                            <span class="cantidad">0</span>
+                            <button class="eliminar">-</button>
+                        </div>
+                    </div>
+                    <div class="plato">
+                        <img src="../img/Img Carta Web/Bebidas/Cervezas/Cusqueña Dorada.webp" alt="Cerveza Cusqueña Dorada">
+                        <h4>Cusqueña de Dorada</h4>
+                        <span class="precio">S/. 9.00</span>
+                        <div class="acciones">
+                            <button class="agregar">+</button>
+                            <span class="cantidad">0</span>
+                            <button class="eliminar">-</button>
+                        </div>
+                    </div>
+                    <div class="plato">
+                        <img src="../img/Img Carta Web/Bebidas/Cervezas/Cusqueña Negra.webp" alt="Cerveza Cusqueña Negra">
+                        <h4>Cusqueña Negra</h4>
+                        <span class="precio">S/. 9.00</span>
+                        <div class="acciones">
+                            <button class="agregar">+</button>
+                            <span class="cantidad">0</span>
+                            <button class="eliminar">-</button>
+                        </div>
+                    </div>
+                    <div class="plato">
+                        <img src="../img/Img Carta Web/Bebidas/Cervezas/Pilsen.webp" alt="Pilsen">
+                        <h4>Pilsen</h4>
+                        <span class="precio">S/. 7.00</span>
+                        <div class="acciones">
+                            <button class="agregar">+</button>
+                            <span class="cantidad">0</span>
+                            <button class="eliminar">-</button>
+                        </div>
+                    </div>
+        </section>
+    <footer class="footer">
+  <div class="footer-container">
+
+    <div class="footer-col">
+      <h3>El Olímpico</h3>
+      <ul>
+        <li><a href="../html/sobre_nosotros.html">Historia</a></li>
+        <li><a href="../html/sobre_nosotros.html">Misión</a></li>
+        <li><a href="../html/sobre_nosotros.html">Visión</a></li>
+        <li><a href="../html/sobre_nosotros.html">El Olímpico Sostenible</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h3>Servicios</h3>
+      <ul>
+        <li><a href="#">Delivery</a></li>
+        <li><a href="#">Reservas</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h3>Métodos de Pago</h3>
+      <div class="metodos-pago">
+        <img src="../img/visa.png" alt="Visa">
+        <img src="../img/yape.png" alt="Yape">
+        <img src="../img/bbva.png" alt="BBVA">
+        <img src="../img/efectivo.png" alt="Efectivo">
+      </div>
+    </div>
+    <div class="footer-col">
+      <h3>Contáctanos</h3>
+      <ul>
+        <li><a href="#">Escríbenos</a></li>
+        <li><a href="#">Trabaja con nosotros</a></li>
+        <li><a href="#">Libro de Reclamaciones</a></li>
+      </ul>
+    </div>
+
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 El Olímpico - Todos los derechos reservados</p>
+  </div>
+</footer>
+
+        
+
+<script src="../js/script_carta.js"></script>
+</body>
+</html>

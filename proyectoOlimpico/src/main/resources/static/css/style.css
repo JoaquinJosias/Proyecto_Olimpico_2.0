@@ -12,6 +12,7 @@ body {
     min-height: 100vh;
     background-size: cover;
     background-position: center;
+    background-color: #fafcff;
     margin: 0;
     padding: 0;
 }
@@ -24,7 +25,7 @@ header {
     width: 100%;
     padding: 8px 40px; /* reducido para acercar el contenido a los bordes */
     background-color: #004c70; /* Azul marino */
-    color: white;
+    color: rgb(255, 255, 255);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -61,7 +62,7 @@ header h1{
     bottom: -6px;
     width: 100%;
     height: 2px;
-    background: #fff;
+    background: #ffffff;
     border-radius: 5px;
     transform-origin: right;
     transform: scale(0);
@@ -71,7 +72,7 @@ header h1{
 
 
 .navigation a:hover::after
-{
+{   
     transform-origin: left;
     transform: scale(1);
 }
@@ -107,7 +108,7 @@ header h1{
 }
 
 .logo-img{
-    width: 90px;
+    width: 90px; 
     height: 90px;
     object-fit: contain;
     display: inline-block;
@@ -122,29 +123,53 @@ header h1{
 }
 
 /* Login */
-.contenedor{
-    margin: 150px auto;
-    position: relative;
+
+
+.contenedor {
+    position: fixed; 
+    top: 58%;            /* centrado vertical */
+    left: 50%;           /* centrado horizontal */
+    transform: translate(-50%, -50%) scale(0); /* centrado y oculto */
     width: 400px;
     height: 520px;
-    background: transparent;
+    background: white; /* mejor que "transparent" */
     border: 2px solid rgba(255, 255, 255, .5);
     border-radius: 20px;
     backdrop-filter: blur(20px);
-    box-shadow: 0 0 30px rgba(0, 0, 0, .5)  ;
+    box-shadow: 0 0 30px rgba(0, 0, 0, .5);
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 50px;
     overflow: hidden;
-    transform: scale(0);
-    transition: transform .5s ease,height .2s ease;
+    transition: transform .5s ease, height .2s ease;
+    z-index: 9999;
 }
 
+/* ---- Modal login/registro (fuera del flujo para evitar espacio en la página) ---- */
+
+
+
+
+.pedido-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #004c70;
+  color: #ffffff;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 5px;
+  border: 2px solid #004c70;
+  
+}
+
+.pedido-btn:hover {
+  background-color: #004c70;
+  color: white;
+}
 
 .contenedor.active-popup
 {
-    transform: scale(1);
+    transform: translate(-50%, -50%) scale(1);
 }
 
 .contenedor.active
@@ -152,6 +177,17 @@ header h1{
     height: 550px;
 }
 
+.contenedor.active-popup {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+
+.contenedor.active {
+  height: 600px;
+}
+
+
+/*-------------------------------*/
 .contenedor .form-box.login
 {
     transition: transform .18s ease;
@@ -304,7 +340,7 @@ header h1{
 {
     accent-color: #162938;
     margin-right: 3px;
-    width:
+    width: 
     15px;
     height: 15px;
 }
@@ -316,12 +352,12 @@ header h1{
 
 .main_image {
     width: 100%;
-    height: 500px;
-    background: url('/img/banner-1.png') no-repeat center center;
-    background-size: cover;
+    height: 500px; 
+    background: url('../img/banner-1.png') no-repeat center center;
+    background-size: cover; 
     display: flex;
     align-items: center;
-    padding-left: 80px;
+    padding-left: 80px; 
     position: relative;
     color: white;
     background-position: top;
@@ -331,7 +367,7 @@ header h1{
     font-size: 2.5rem;
     font-weight: bold;
     margin-bottom: 5px;
-
+    
 }
 
 
@@ -343,16 +379,16 @@ header h1{
     font-size: 1rem;
     border-radius: 8px;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: 0.3s;
 }
 
 .contenedor-imagen button:hover {
-    background-color: #145ea8;
+    background-color: #145ea8; 
 }
 
 
 .footer {
-    background-color: #0d6efd;
+    background-color: #0d6efd; 
     color: white;
     text-align: center;
     padding: 30px 15px;
@@ -538,6 +574,7 @@ header h1{
     height: auto;       /* mantiene la proporción correcta */
     margin-right: 15px; /* un poco más de espacio entre los logos */
     margin-top: 10px;
+    border-radius: 50%;
     transition: transform 0.3s ease;
 }
 
@@ -553,4 +590,326 @@ header h1{
     border-top: 1px solid rgba(255,255,255,0.2);
     padding-top: 15px;
     color: #aaa;
+}
+
+/* ---------- Carrusel de promociones ---------- */
+.promos-section {
+  max-width: 1200px;
+  margin: 36px auto;
+  padding: 0 20px;
+}
+
+.carousel-container {
+  position: relative;
+  background: #fff;
+  border-radius: 32px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+
+.carousel-track-wrapper {
+  overflow: hidden;
+  width: 100%;
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 420ms cubic-bezier(.22,.9,.28,1);
+  will-change: transform;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.carousel-slide {
+  min-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  background: #f5f5f5;
+}
+
+.carousel-slide img {
+  display: block;
+  width: 100%;
+  height: 360px;           /* ajusta la altura según tu diseño */
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* Botones */
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+  border: none;
+  background: rgba(0, 76, 112, 0.452); /* color similar a tu header */
+  color: #fff;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 6;
+  box-shadow: 0 6px 16px rgba(2,6,23,0.18);
+}
+.carousel-btn.left { left: 12px; }
+.carousel-btn.right { right: 12px; }
+.carousel-btn:active { transform: translateY(-50%) scale(.98); }
+
+/* Indicadores */
+.carousel-indicators {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 7;
+}
+.carousel-indicators button {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  border: none;
+  background: rgba(255,255,255,0.7);
+  opacity: 0.9;
+  cursor: pointer;
+}
+.carousel-indicators button.active {
+  background: #004c70; /* color de acento */
+  transform: scale(1.15);
+}
+
+
+/* Contenedor general */
+.contenedor_ofertas {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap; /* hace que en móvil se apilen */
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+/* Bloque de cada oferta */
+.oferta_chela,
+.oferta_mariscos {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex: 1 1 45%;
+  background: #f9f9f9;
+  border-radius: 16px;
+  padding: 15px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+}
+
+.oferta_chela:hover,
+.oferta_mariscos:hover {
+  transform: scale(1.03);
+}
+
+/* Imagen */
+.oferta_chela img,
+.oferta_mariscos img {
+  width: 200px;
+  height: auto;
+  border-radius: 15px;
+  object-fit: cover;
+}
+
+/* Texto */
+.texto {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #222;
+}
+
+.texto h4 {
+  margin-bottom: 8px;
+  font-size: 1.2rem;
+  color: #004c70;
+}
+
+.texto p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+/* Estilos específicos */
+.oferta_chela {
+  flex-direction: row; /* imagen izquierda */
+  border-left: 4px solid #1877f2;
+}
+
+.oferta_mariscos {
+  flex-direction: row-reverse; /* imagen derecha */
+  border-right: 4px solid #004c70;
+  text-align: right;
+}
+
+/* Responsivo (pantallas pequeñas) */
+@media (max-width: 800px) {
+  .contenedor_ofertas {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .oferta_chela,
+  .oferta_mariscos {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .oferta_mariscos {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .oferta_chela img,
+  .oferta_mariscos img {
+    width: 90%;
+  }
+}
+/* ===== Sección: Contenedor ofertas 2 (debajo de la anterior) ===== */
+.contenedor_ofertas2 {
+  max-width: 1200px;
+  margin: 32px auto 60px; /* espacio superior para separarlo de la sección anterior */
+  padding: 0 20px;
+  display: flex;
+  gap: 30px;
+  align-items: stretch;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+}
+
+/* tarjeta base para ambas ofertas */
+.promo-card {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  background: #fff;
+  border-radius: 14px;
+  padding: 14px;
+  flex: 1 1 48%;       /* 2 tarjetas lado a lado en desktop */
+  box-shadow: 0 6px 20px rgba(2,6,23,0.06);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  overflow: hidden;
+}
+
+/* hover sutil */
+.promo-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 36px rgba(2,6,23,0.12);
+}
+
+/* imagen */
+.promo-card img {
+  width: 220px;        /* ajusta si quieres más grande/pequeña */
+  height: 170px;       /* mantener proporción visual */
+  object-fit: cover;
+  border-radius: 12px;
+  flex: 0 0 auto;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+}
+
+/* texto */
+.promo-card .texto {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: center;
+  color: #1f2933;
+}
+
+.promo-card .texto h4 {
+  margin: 0;
+  font-size: 1.15rem;
+  color: #004c70;
+  font-weight: 700;
+}
+
+.promo-card .texto p {
+  margin: 0;
+  color: #333;
+  font-size: 0.98rem;
+  line-height: 1.35;
+}
+
+/* botones de acción opcionales */
+.promo-btn {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 8px 14px;
+  background: #004c70;
+  color: #fff;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: .95rem;
+  width: max-content;
+}
+
+/* estilos específicos: borde y orientación */
+.oferta_ceviche {
+  border-left: 4px solid #1877f2;
+  /* imagen a la izquierda, texto a la derecha (por defecto) */
+}
+
+.oferta_mariscos {
+  border-right: 4px solid #0d6efd;
+  /* si quieres imagen a la derecha, invertir el orden en pantallas anchas */
+  flex-direction: row-reverse;
+  text-align: left; /* mantener texto legible */
+}
+
+/* si deseas el texto del bloque derecho alineado a la derecha, descomenta: */
+/* .oferta_mariscos .texto { text-align: right; } */
+
+/* RESPONSIVE: en pantallas pequeñas apilar verticalmente */
+@media (max-width: 880px) {
+  .contenedor_ofertas2 {
+    margin-top: 18px;
+    gap: 18px;
+  }
+  .promo-card {
+    flex: 1 1 100%;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    padding: 12px;
+  }
+  .promo-card img {
+    width: 92%;
+    height: auto;
+    max-height: 320px;
+  }
+  .oferta_mariscos {
+    flex-direction: column; /* quitar row-reverse en móvil para mejor lectura */
+  }
+  .promo-card .texto { align-items: center; }
+  .promo-btn { width: 60%; text-align: center; }
+}
+
+/*------------------------------------------------------------------------------------------------------
+
+
+/* responsive */
+@media (max-width: 900px) {
+  .carousel-slide img { height: 300px; }
+}
+@media (max-width: 600px) {
+  .carousel-slide img { height: 220px; }
+  .carousel-btn { width: 40px; height: 40px; font-size: 20px; }
 }
