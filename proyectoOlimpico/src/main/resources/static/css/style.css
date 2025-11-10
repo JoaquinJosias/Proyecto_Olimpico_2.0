@@ -127,7 +127,7 @@ header h1{
 
 .contenedor {
     position: fixed; 
-    top: 58%;            /* centrado vertical */
+    top: 50%;            /* centrado vertical */
     left: 50%;           /* centrado horizontal */
     transform: translate(-50%, -50%) scale(0); /* centrado y oculto */
     width: 400px;
@@ -183,7 +183,7 @@ header h1{
 
 
 .contenedor.active {
-  height: 600px;
+  height: 750px;
 }
 
 
