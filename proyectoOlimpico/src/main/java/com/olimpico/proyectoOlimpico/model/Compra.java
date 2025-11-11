@@ -40,7 +40,7 @@ public class Compra {
     private List<Pago_Proveedor> pagoProveedores;
 
     @OneToMany(mappedBy = "compra", cascade = CascadeType.ALL)
-    private List<DetCompra> detallesCompra;
+    private List<FacturaCompra> facturasCompra;
 
 
 }

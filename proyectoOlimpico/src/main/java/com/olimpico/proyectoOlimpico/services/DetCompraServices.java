@@ -1,6 +1,6 @@
 package com.olimpico.proyectoOlimpico.services;
 
-import com.olimpico.proyectoOlimpico.model.DetCompra;
+import com.olimpico.proyectoOlimpico.model.FacturaCompra;
 import com.olimpico.proyectoOlimpico.repo.DetCarritoRepository;
 import com.olimpico.proyectoOlimpico.repo.DetCompraRepository;
 import org.springframework.stereotype.Service;
@@ -18,21 +18,21 @@ public class DetCompraServices {
 
     //
 
-    public List<DetCompra> getAllDetCompras()
+    public List<FacturaCompra> getAllDetCompras()
     {
         return detCompraRepository.findAll();
     }
 
     //
 
-    public  DetCompra getDetCompraById(String id)
+    public  FacturaCompra getDetCompraById(String id)
     {
         return detCompraRepository.findById(id).orElse(null);
     }
 
     //
 
-    public  DetCompra saveDetCompra (DetCompra detCompra)
+    public  FacturaCompra saveDetCompra (FacturaCompra detCompra)
     {
         return  detCompraRepository.save(detCompra);
     }

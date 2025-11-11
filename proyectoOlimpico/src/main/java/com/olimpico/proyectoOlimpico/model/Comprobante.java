@@ -9,6 +9,7 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Entity
@@ -44,4 +45,15 @@ public class Comprobante {
     @OneToOne
     @JoinColumn(name = "id_pedido", referencedColumnName = "id_pedido")
     private Pedido pedido;
+
+    @OneToMany(mappedBy = "comprobante", cascade = CascadeType.ALL)
+    private List<DetComprobante> detComprobantes;
+
+
+
+
+
+
+
+
 }

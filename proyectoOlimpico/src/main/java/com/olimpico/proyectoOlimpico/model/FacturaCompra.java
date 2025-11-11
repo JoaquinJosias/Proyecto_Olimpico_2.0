@@ -8,11 +8,11 @@ import java.time.LocalDate;
 
 @Entity
 @Data
-@Table(name = "Det_Compra")
-public class DetCompra {
+@Table(name = "Factura_Compra")
+public class FacturaCompra {
     @Id
-    @Column(name = "id_detalle")
-    private String id_detalle;
+    @Column(name = "id_factura")
+    private String id_factura;
 
     @ManyToOne
     @JoinColumn(name = "id_compra", referencedColumnName = "id_compra")

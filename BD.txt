@@ -189,8 +189,8 @@ create table Det_Pedido(
     foreign key(id_producto) references Producto(id_producto)
 );
 
-CREATE TABLE Det_Compra (
-    id_detalle varchar(10) primary key,
+CREATE TABLE Factura_Compra (
+    id_factura varchar(10) primary key,
     id_compra varchar(10),
     id_producto varchar(10),
     cantidad int not null,
@@ -214,6 +214,18 @@ CREATE TABLE Comprobante (
     estado ENUM('emitido', 'anulado') DEFAULT 'emitido',
     observaciones TEXT,
     FOREIGN KEY (id_pedido) REFERENCES Pedido(id_pedido)
+);
+
+CREATE TABLE Det_Comprobante(
+	id_detalle varchar(10) primary key,
+    id_comprobante varchar(10) not null,
+    id_producto varchar(10) not null,
+    descripcion varchar(255),
+    cantidad int not null,
+    precio_unitario decimal(10,2) not null,
+    subtotal decimal(10,2) not null,
+	FOREIGN KEY (id_comprobante) REFERENCES Comprobante(id_comprobante),
+    FOREIGN KEY (id_producto) REFERENCES Producto(id_producto)
 );
 
 

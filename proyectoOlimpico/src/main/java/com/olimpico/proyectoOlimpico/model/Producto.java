@@ -39,5 +39,8 @@ public class Producto {
     private List<DetPedido> detallesPedido;
 
     @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
-    private List<DetCompra> detallesCompra;
+    private List<FacturaCompra> facturaCompras;
+
+    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
+    private List<DetComprobante> detComprobantes;
 }
