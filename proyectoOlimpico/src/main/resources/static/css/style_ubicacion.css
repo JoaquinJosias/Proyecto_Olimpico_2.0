@@ -1,0 +1,202 @@
+/* css/style.css */
+
+/* Reset muy ligero */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* Paleta: fondo oscuro y acento naranja */
+:root{
+  --bg: #1f1b1b;          /* fondo general */
+  --header-bg: #5572d3;   /* barra superior */
+  --panel-bg: #231f1f;    /* paneles internos */
+  --accent: #386ed1;      /* naranja borde/acento */
+  --white: #000000;
+  --muted: #000000;
+}
+
+/* Body */
+body{
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  background: linear-gradient(#9b9595, #ffffff 160px), var(--bg);
+  color: var(--white);
+  min-height: 100vh;
+}
+
+/* Header */
+.site-header{
+  background: var(--header-bg);
+  padding: 26px 40px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.6);
+}
+.header-inner{
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.logo{
+  height: 96px; /* escala similar a la imagen */
+  display: block;
+}
+
+/* Contenedor principal centrado */
+.container{
+  max-width: 1100px;
+  margin: 44px auto;
+  padding: 0 24px 60px;
+}
+
+/* Search section */
+.search-section{
+  margin-bottom: 34px;
+}
+.search-label{
+  display: block;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 12px;
+  font-size: 18px;
+}
+.search-input{
+  width: 100%;
+  background: rgba(0,0,0,0.2);
+  border: 3px solid rgba(255,255,255,0.15);
+  color: var(--white);
+  padding: 20px 22px;
+  border-radius: 10px;
+  font-size: 20px;
+  outline: none;
+  transition: box-shadow .12s, border-color .12s;
+  /* imita borde blanco interior que se ve en la imagen */
+  box-shadow: inset 0 0 0 2px rgba(255,255,255,0.03);
+}
+.search-input:focus{
+  border-color: var(--white);
+  box-shadow: 0 0 0 3px rgba(242,169,0,0.12);
+}
+
+/* Grid de tarjetas: 2 columnas */
+.cards-grid{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px 28px; /* filas columnas */
+}
+
+/* Tarjeta */
+.card{
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 20px;
+  background: transparent;
+  border-radius: 10px;
+  border: 3px solid var(--accent);
+  min-height: 96px;
+  background-color: rgba(0,0,0,0.12);
+  transition: transform .12s, box-shadow .12s;
+}
+.card:hover{
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+}
+
+/* Icono */
+.card-icon{
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  border-radius: 6px;
+  background: transparent;
+  flex-shrink: 0;
+  margin-left: 6px;
+}
+
+/* Contenido texto */
+.card-title{
+  font-size: 18px;
+  letter-spacing: 0.6px;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  font-weight: 800;
+}
+.card-sub{
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.25;
+  max-width: 800px;
+}
+
+/* Responsive */
+@media (max-width: 860px){
+  .cards-grid{ grid-template-columns: 1fr; }
+  .logo{ height: 40px; }
+  .container{ padding: 0 18px 40px; }
+  .search-input{ font-size: 18px; padding: 16px 18px; }
+  .card-icon{ width: 64px; height: 64px; }
+}
+
+
+/* ---------- Botón simple ---------- */
+.btn {
+  display: inline-block;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--white);
+  background: transparent;
+  border: 2px solid var(--accent);
+  transition: background .12s, transform .12s;
+  font-size: 13px;
+}
+.btn:hover{ transform: translateY(-2px); background: rgba(242,169,0,0.06); }
+
+/* posicionado acciones dentro de la card */
+.card-actions{
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ---------- Overlay de carga ---------- */
+.loading-overlay{
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(12,10,10,0.6);
+  z-index: 9999;
+}
+
+.loading-box{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 18px 22px;
+  border-radius: 10px;
+  background: rgba(27,24,24,0.95);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+}
+
+/* Spinner */
+.spinner{
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 4px solid rgba(255,255,255,0.12);
+  border-top-color: var(--accent);
+  animation: spin 0.9s linear infinite;
+  margin-bottom: 10px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.loading-text{
+  color: var(--white);
+  font-weight: 700;
+  letter-spacing: .6px;
+}
+
+/* clase .hidden para ocultar overlay */
+.hidden { display: none !important; }
+
+/* ajuste para evitar que overlay bloquee el focus visual de botones (accesibilidad) */
+.loading-overlay[aria-hidden="true"] { display: none; }
