@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -92,81 +91,103 @@
 
 
 <!------------------------------------------------------------------------------------------------------>
+        <div class="contenedor">
+
+            <!-- CAMBIO #3: este botón para cerrar debe funcionar con JS -->
+            <span class="icono-cerrar"><ion-icon name="close-outline"></ion-icon></span>
 
 
+            <!-- LOGIN -->
+            <div class="form-box login">
+                <h2>Iniciar Sesión</h2>
 
-    <div class="contenedor">
-        <span class="icono-cerrar"><ion-icon name="close-outline"></ion-icon></span>
+                <!-- CAMBIO #4: el form YA está bien apuntado -->
+                <form action="/login" method="POST">
 
-        <div class="form-box login">
-            <h2>Iniciar Sesión</h2>
-            <form action="">
-                <div class="input-box">
-                    <span class="icon"><ion-icon name="mail-outline"></ion-icon>  </span>
-                    <input type="email" required>
-                    <label >Usuario</label>
-                </div>
-                <div class="input-box">
-                    <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
-                    <input type="password" required>
-                    <label >Contraseña</label>
-                </div>
-                <button type="submit" class="btn">Login</button>
-                <div class="registro">
-                    <p>No tienes una cuenta? <a class="register-link">Registrarme</a></p>
-                </div>
-            </form>
+                    <!-- CAMBIO #5: tus íconos están bien -->
+                    <div class="input-box">
+                        <span class="icon"><ion-icon name="mail-outline"></ion-icon></span>
+
+                        <!-- CAMBIO #6: el campo debe llamarse username -->
+                        <input type="text" name="username" required>
+                        <label>Usuario</label>
+                    </div>
+
+                    <div class="input-box">
+                        <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
+                        <input type="password" name="password" required>
+                        <label>Contraseña</label>
+                    </div>
+
+                    <button type="submit" class="btn">Login</button>
+
+                    <div class="registro">
+                        <!-- CAMBIO #7: este link NECESARIO para abrir registro -->
+                        <p>No tienes una cuenta? <a class="register-link">Registrarme</a></p>
+                    </div>
+
+                    <!-- CAMBIO #8: mensaje de error para login -->
+                    <p style="color:red;" th:if="${error}">[[${error}]]</p>
+
+                </form>
+            </div>
+
+
+            <!-- REGISTRO -->
+            <div class="form-box registro">
+                <h2>Registro</h2>
+
+                <!-- CAMBIO #9: el form ya apunta al controlador correcto -->
+                <form action="/registro" method="POST">
+
+                    <!-- TODOS LOS CAMPOS ESTÁN BIEN -->
+                    <div class="input-box">
+                        <input type="text" name="nombreCompleto" required>
+                        <label>Apellidos y Nombres</label>
+                    </div>
+
+                    <div class="input-box">
+                        <input type="text" name="username" required>
+                        <label>Nombre Usuario</label>
+                    </div>
+
+                    <div class="input-box">
+                        <input type="email" name="email" required>
+                        <label>Email</label>
+                    </div>
+
+                    <div class="input-box">
+                        <input type="password" name="password" required>
+                        <label>Contraseña</label>
+                    </div>
+
+                    <div class="input-box">
+                        <input type="text" name="dni" required>
+                        <label>DNI</label>
+                    </div>
+
+                    <div class="input-box">
+                        <input type="text" name="telefono" required>
+                        <label>Teléfono</label>
+                    </div>
+
+                    <div class="input-box">
+                        <input type="text" name="direccion" required>
+                        <label>Dirección</label>
+                    </div>
+
+                    <div class="terminos">
+                        <label><input type="checkbox" required> Acepto Términos y Condiciones</label>
+                    </div>
+
+                    <button type="submit" class="btn">Registrarme</button>
+
+                    <!-- CAMBIO #10: link para regresar al login -->
+                    <p>¿Ya tienes cuenta? <a class="login-link">Iniciar Sesión</a></p>
+
+                </form>
+            </div>
         </div>
-
-
-        <div class="form-box registro">
-            <h2>Registro</h2>
-            <form action="">
-                <div class="input-box">
-                    <span class="icon"><ion-icon name="person-outline"></ion-icon>  </span>
-                    <input type="text" required>
-                    <label >Apellidos y Nombres</label>
-                </div>
-                <div class="input-box">
-                    <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
-                    <input type="email" required>
-                    <label >Nombre Usuario</label>
-                </div>
-                <div class="input-box">
-                    <span class="icon"><ion-icon name="mail-outline"></ion-icon></span>
-                    <input type="email" required>
-                    <label >Email</label>
-                </div>
-                <div class="input-box">
-                    <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
-                    <input type="password" required>
-                    <label >Contraseña</label>
-                </div>
-                <div class="input-box">
-                    <span class="icon"><ion-icon name="id-card-outline"></ion-icon></ion-icon></span>
-                    <input type="text" required>
-                    <label >DNI</label>
-                </div>
-                <div class="input-box">
-                    <span class="icon"><ion-icon name="call-outline"></ion-icon></span>
-                    <input type="text" required>
-                    <label >Telefono</label>
-                </div>
-                <div class="input-box">
-                    <span class="icon"><ion-icon name="compass-outline"></ion-icon></span>
-                    <input type="text" required>
-                    <label >Direccíon</label>
-                </div>
-                <div class="terminos">
-                    <label for=""><input type="checkbox">Acepto Terminos y Condiciones</label>
-                </div>
-                <button type="submit" class="btn">Registrarme</button>
-                <div class="registro">
-                    <p>Tienes una cuenta? <a class="login-link">Iniciar Sesión</a></p>
-                </div>
-            </form>
-        </div>
-    </div>
     <footer class="footer">
   <div class="footer-container">
 

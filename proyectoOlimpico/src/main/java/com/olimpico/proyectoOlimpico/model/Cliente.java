@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.List;
+import java.util.UUID;
 
 @Data
 @Entity
@@ -11,7 +12,7 @@ import java.util.List;
 public class Cliente {
     @Id
     @Column(name = "id_cliente")
-    private String id_cliente;
+    private String id_cliente= UUID.randomUUID().toString();
 
     private String nombre_cliente;
 
@@ -27,7 +28,8 @@ public class Cliente {
 
     private String estado;
 
-    @OneToOne(mappedBy = "cliente", cascade = CascadeType.ALL)
+    @OneToOne
+    @JoinColumn(name = "id_usuario")
     private Usuario usuario;
 
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)

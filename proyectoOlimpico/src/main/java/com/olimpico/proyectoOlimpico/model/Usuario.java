@@ -5,6 +5,7 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @Data
 @Entity
@@ -12,7 +13,8 @@ import java.util.List;
 public class Usuario {
     @Id
     @Column(name = "id_usuario")
-    private String id_usuario;
+
+    private String id_usuario= UUID.randomUUID().toString();
 
     private String username;
 
@@ -28,8 +30,7 @@ public class Usuario {
     @JoinColumn(name = "id_empleado", referencedColumnName = "id_empleado")
     private  Empleado empleado;
 
-    @OneToOne
-    @JoinColumn(name = "id_cliente", referencedColumnName = "id_cliente")
+    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
     private Cliente cliente;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
