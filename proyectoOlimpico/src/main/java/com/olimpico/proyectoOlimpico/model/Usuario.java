@@ -4,17 +4,17 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
 @Data
 @Entity
-@Table(name = "Usuario")
+@Table(name = "Usuario", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 public class Usuario {
     @Id
     @Column(name = "id_usuario")
-
-    private String id_usuario= UUID.randomUUID().toString();
+    private String id_usuario;
 
     private String username;
 
@@ -22,19 +22,21 @@ public class Usuario {
 
     private String email;
 
-    private String estado;
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "usuarios_roles",
+            joinColumns = @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario"),
+            inverseJoinColumns = @JoinColumn(name = "id_rol", referencedColumnName = "id_rol")
 
-    private LocalDateTime fecha_creacion;
 
-    @OneToOne
-    @JoinColumn(name = "id_empleado", referencedColumnName = "id_empleado")
-    private  Empleado empleado;
+    )
+    private Collection<Rol> roles;
+
 
     @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
     private Cliente cliente;
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
-    private List<UsuarioRol> usuarioRols;
 
-
+    public Usuario(String username, String email, String passwordHash, List<Rol> roleUser) {
+    }
 }

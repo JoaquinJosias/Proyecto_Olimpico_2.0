@@ -16,10 +16,6 @@ public class Inventario {
 
     private LocalDate fecha_inventario;
 
-    @ManyToOne
-    @JoinColumn(name = "id_empleado", referencedColumnName = "id_empleado")
-    private Empleado empleado;
-
 
     @OneToMany(mappedBy = "inventario", cascade = CascadeType.ALL)
     private  List<DetInveProd> detallesProducto;

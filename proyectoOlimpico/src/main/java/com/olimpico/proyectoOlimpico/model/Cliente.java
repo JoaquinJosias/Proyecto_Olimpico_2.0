@@ -12,21 +12,17 @@ import java.util.UUID;
 public class Cliente {
     @Id
     @Column(name = "id_cliente")
-    private String id_cliente= UUID.randomUUID().toString();
+    private String id_cliente;
 
     private String nombre_cliente;
 
     private String apellido_cliente;
-
-    private String tipo_documento;
 
     private String numero_documento;
 
     private String telefono;
 
     private String direccion;
-
-    private String estado;
 
     @OneToOne
     @JoinColumn(name = "id_usuario")

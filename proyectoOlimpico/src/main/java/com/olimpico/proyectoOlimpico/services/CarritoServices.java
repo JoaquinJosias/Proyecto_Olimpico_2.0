@@ -1,7 +1,6 @@
 package com.olimpico.proyectoOlimpico.services;
 
 import com.olimpico.proyectoOlimpico.model.Carrito;
-import com.olimpico.proyectoOlimpico.repo.CargoRepository;
 import com.olimpico.proyectoOlimpico.repo.CarritoRepository;
 import org.springframework.stereotype.Service;
 

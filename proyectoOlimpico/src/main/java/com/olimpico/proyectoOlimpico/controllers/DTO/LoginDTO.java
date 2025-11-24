@@ -1,9 +1,0 @@
-package com.olimpico.proyectoOlimpico.controllers.DTO;
-
-import lombok.Data;
-
-@Data
-public class LoginDTO {
-    private String username;
-    private String password;
-}
