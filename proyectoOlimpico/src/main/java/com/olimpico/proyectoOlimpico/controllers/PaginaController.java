@@ -35,4 +35,5 @@ public class PaginaController {
     public String ubicacion() {
         return "ubicacion"; // templates/ubicacion.html
     }
+
 }

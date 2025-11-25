@@ -10,20 +10,24 @@ import java.lang.reflect.Array;
 import java.util.Arrays;
 
 @Service
-public class UsuarioServicesImpl implements  UsuarioServices{
+public class UsuarioServiceImp implements  UsuarioService{
 
     private UsuarioRepository usuarioRepository;
 
-    public UsuarioServicesImpl(UsuarioRepository usuarioRepository) {
+
+    public UsuarioServiceImp(UsuarioRepository usuarioRepository) {
         super();
         this.usuarioRepository = usuarioRepository;
     }
 
     @Override
-    public Usuario guardar(UsuarioRegistroDTO registroDTO)
-    {
-        Usuario usuario = new Usuario(registroDTO.getUsername(),registroDTO.getEmail(),registroDTO.getPassword_hash(), Arrays.asList(new Rol("ROLE_USER")));
+    public Usuario guardarUsuario(UsuarioRegistroDTO usuarioRegistroDTO) {
+        Usuario usuario = new Usuario(usuarioRegistroDTO.getNombre(),
+                usuarioRegistroDTO.getApellido(),
+                usuarioRegistroDTO.getEmail(),
+                usuarioRegistroDTO.getPassword(),
+                Arrays.asList(new Rol("ROL_ADMIN"))
+        );
         return usuarioRepository.save(usuario);
-
     }
 }

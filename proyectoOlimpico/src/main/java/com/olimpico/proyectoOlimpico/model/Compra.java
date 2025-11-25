@@ -14,7 +14,7 @@ import java.util.List;
 public class Compra {
     @Id
     @Column(name = "id_compra")
-    private String id_compra;
+    private Long id_compra;
 
     private String numero_comprobante;
 

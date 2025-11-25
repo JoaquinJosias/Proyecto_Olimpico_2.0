@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Registrar Producto</title>
+    <link rel="stylesheet" href="/css/estilo_registrar_producto.css" />
+</head>
+<body>
+<main class="card">
+    <header class="card-header">
+        <h1>Registrar Producto</h1>
+        <div th:if=${param.exito}>
+            <div class="alert alert-info">Se ha registrado exitosamente a
+                la aplicación</div>
+        </div>
+    </header>
+    <form th:action="@{/producto}" th:object="${producto}" method="post" id="formProducto" class="form-grid" novalidate>
+
+        <div class="field">
+            <label for="nombre_producto">Nombre Producto</label>
+            <input id="nombre_producto" th:field="*{nombreProducto}" type="text" required placeholder="Ingrese nombre del producto" />
+            <div th:if="${#fields.hasErrors('nombreProducto')}" th:errors="*{nombreProducto}"></div>
+        </div>
+
+        <div class="field">
+            <label for="precio_venta">Precio Venta</label>
+            <input id="precio_venta" th:field="*{precioVenta}" type="number" step="0.01" min="0" placeholder="0.00" required />
+            <div th:if="${#fields.hasErrors('precioVenta')}" th:errors="*{precioVenta}"></div>
+        </div>
+
+        <div class="field">
+            <label for="costo_unitario">Costo Unitario</label>
+            <input id="costo_unitario" th:field="*{costoUnitario}" type="number" step="0.01" min="0" placeholder="0.00" />
+            <div th:if="${#fields.hasErrors('costoUnitario')}" th:errors="*{costoUnitario}"></div>
+        </div>
+
+        <div class="field">
+            <label for="stock_actual">Stock Actual</label>
+            <input id="stock_actual" th:field="*{stockActual}" type="number" step="1" min="0" placeholder="0" />
+            <div th:if="${#fields.hasErrors('stockActual')}" th:errors="*{stockActual}"></div>
+        </div>
+
+        <div class="field fullwidth">
+            <label for="estado">Estado</label>
+            <select id="estado" th:field="*{estado}">
+                <option value="activo">Activo</option>
+                <option value="inactivo">Inactivo</option>
+            </select>
+            <div th:if="${#fields.hasErrors('estado')}" th:errors="*{estado}"></div>
+        </div>
+
+        <div class="field fullwidth terms">
+            <label class="checkbox">
+                <input id="acepta" name="acepta" type="checkbox" />
+                <span>Aceptar Términos de Administración</span>
+            </label>
+        </div>
+
+        <div class="actions fullwidth">
+            <button type="submit" class="btn-primary">Registrar Producto</button>
+        </div>
+    </form>
+
+</main>
+
+<script src="/js/jquery-3.7.1.min.js"></script>
+
+</body>
+</html>

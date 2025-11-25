@@ -24,7 +24,7 @@ public class RolController {
     }
 
     @GetMapping("/roles/{id}" )
-    public Rol getRolById(String id) {
+    public Rol getRolById(Long id) {
         return rolServices.getByIdRol(id);
     }
 
@@ -34,7 +34,7 @@ public class RolController {
     }
 
     @DeleteMapping("/roles/{id}" )
-    public void deleteRol(String id) {
+    public void deleteRo(Long id) {
         rolServices.deleteRol(id);
     }
 }

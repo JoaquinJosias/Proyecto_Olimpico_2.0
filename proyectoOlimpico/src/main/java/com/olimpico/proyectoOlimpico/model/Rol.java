@@ -3,21 +3,24 @@ package com.olimpico.proyectoOlimpico.model;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.util.List;
+import java.util.UUID;
 
 @Data
 @Entity
-@NoArgsConstructor
 @Table(name = "Rol")
 public class Rol {
     @Id
-    @Column(name = "id_rol")
-    private String id_rol;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id_rol;
 
     private String nombre;
 
     public Rol(String nombre) {
         this.nombre = nombre;
     }
+
+    public Rol() {}
 }

@@ -11,7 +11,7 @@ import java.util.List;
 public class Carrito {
     @Id
     @Column(name = "id_carrito")
-    private String id_carrito;
+    private Long id_carrito;
 
     private String estado;
 

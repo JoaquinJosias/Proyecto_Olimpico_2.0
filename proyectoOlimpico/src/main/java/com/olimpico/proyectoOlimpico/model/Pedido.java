@@ -12,7 +12,7 @@ import java.util.List;
 public class Pedido {
     @Id
     @Column(name = "id_pedido")
-    private String id_pedido;
+    private Long id_pedido;
     private String tipo_comprobante;
     private String tipo_entrega;
     private String direccion_entrega;

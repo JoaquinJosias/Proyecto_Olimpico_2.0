@@ -7,256 +7,240 @@
     <title>Login</title>
 </head>
 <body>
-        <header>
-        <div class="brand">
-            <img src="/img/logo-olimpico.png"class="logo-img">
-            <h1 class="titulo">EL OLIMPICO</h1>
-        </div>
-        <nav class="navigation">
-            <a th:href="@{/carta}">Nuestra Carta</a>
-            <a th:href="@{/promociones}">Promociones</a>
-            <a th:href="@{/reserva}">Reserva</a>
-            <a th:href="@{/sobre_nosotros}">Sobre Nosotros</a>
-            <a th:href="@{/ubicacion}">Ubicacion</a>
-            <button class="btnLogin">Login</button>   
-        </nav>
-        </header>
+<header>
+    <div class="brand">
+        <img src="/img/logo-olimpico.png" class="logo-img">
+        <h1 class="titulo">EL OLIMPICO</h1>
+    </div>
+    <nav class="navigation">
+        <a th:href="@{/carta}">Nuestra Carta</a>
+        <a th:href="@{/promociones}">Promociones</a>
+        <a th:href="@{/reserva}">Reserva</a>
+        <a th:href="@{/sobre_nosotros}">Sobre Nosotros</a>
+        <a th:href="@{/ubicacion}">Ubicacion</a>
 
-        <div class="main_image">
-            <div class="contenedor-imagen">
-                    <h1>HAZ TU PEDIDO AQUÍ</h1>
-                    <a th:href="@{/carta}" class="pedido-btn">Hacer un pedido</a>
+        <!-- Si no hay usuario en sesión -->
+        <a th:if="${session.usuarioId == null}" th:href="@{/login}" >Login</a>
+
+        <!-- Si hay usuario en sesión: icono con dropdown -->
+        <div th:if="${session.usuarioId != null}" class="user-menu"
+             style="position:relative; display:inline-block; margin-left:16px;">
+            <button id="userBtn" class="user-btn" type="button" aria-haspopup="true" aria-expanded="false"
+                    onclick="toggleUserMenu()" title="Cuenta"
+                    style="background:transparent;border:none;cursor:pointer;padding:6px;">
+                <ion-icon name="person-circle-outline" style="font-size:1.9rem;"></ion-icon>
+            </button>
+
+            <div id="userDropdown" class="user-dropdown" role="menu"
+                 style="display:none; position:absolute; right:0; margin-top:8px; background:#fff; border:1px solid #ddd; box-shadow:0 4px 12px rgba(0,0,0,.08); min-width:180px; z-index:50; padding:8px; border-radius:4px;">
+                <div class="user-name" style="padding:6px 8px; font-weight:600; color:#333;"
+                     th:text="${session.usuarioNombre}">Usuario
+                </div>
+                <hr style="margin:6px 0;">
+                <a th:href="@{/perfil}" role="menuitem"
+                   style="display:block; padding:6px 8px; color:#333; text-decoration:none;">Perfil</a>
+                <a th:if="${session.usuarioEsAdmin}"
+                   th:href="@{/proveedor}"
+                   role="menuitem"
+                   style="display:block; padding:6px 8px; color:#333; text-decoration:none;">
+                    R. Proveedor
+                </a>
+                <a th:if="${session.usuarioEsAdmin}"
+                   th:href="@{/producto}"
+                   role="menuitem"
+                   style="display:block; padding:6px 8px; color:#333; text-decoration:none;">
+                    R. Productos
+                </a>
+                <a th:if="${session.usuarioEsAdmin}"
+                   th:href="@{/mantenimiento}"
+                   role="menuitem"
+                   style="display:block; padding:6px 8px; color:#333; text-decoration:none;">
+                    Mantenimiento
+                </a>
+                <a th:href="@{/logout}" role="menuitem"
+                   style="display:block; padding:6px 8px; color:#c00; text-decoration:none;">Cerrar sesión</a>
             </div>
         </div>
-
-        <!-- Inicio: Carrusel de Promociones -->
-<section class="promos-section" aria-label="Promociones">
-  <div id="promotionsCarousel" class="carousel-container" aria-roledescription="carousel">
-    <button class="carousel-btn left" aria-label="Promoción anterior">‹</button>
-
-    <div class="carousel-track-wrapper">
-      <ul class="carousel-track">
-          <li class="carousel-slide"><img th:src="@{/img/carrusel1.jpg}" alt="Promoción 1"></li>
-          <li class="carousel-slide"><img th:src="@{/img/carrusel2.png}" alt="Promoción 2"></li>
-          <li class="carousel-slide"><img th:src="@{/img/carrusel3.webp}" alt="Promoción 3"></li>
-          <li class="carousel-slide"><img th:src="@{/img/banner-1.png}" alt="Promoción 4"></li>
-      </ul>
+    </nav>
     </div>
-    <button class="carousel-btn right" aria-label="Siguiente promoción">›</button>
+</header>
 
-    <div class="carousel-indicators" role="tablist" aria-label="Indicadores de promociones"></div>
-  </div>
+<div class="main_image">
+    <div class="contenedor-imagen">
+        <h1>HAZ TU PEDIDO AQUÍ</h1>
+        <a th:href="@{/carta}" class="pedido-btn">Hacer un pedido</a>
+    </div>
+</div>
+
+<!-- Inicio: Carrusel de Promociones -->
+<section class="promos-section" aria-label="Promociones">
+    <div id="promotionsCarousel" class="carousel-container" aria-roledescription="carousel">
+        <button class="carousel-btn left" aria-label="Promoción anterior">‹</button>
+
+        <div class="carousel-track-wrapper">
+            <ul class="carousel-track">
+                <li class="carousel-slide"><img th:src="@{/img/carrusel1.jpg}" alt="Promoción 1"></li>
+                <li class="carousel-slide"><img th:src="@{/img/carrusel2.png}" alt="Promoción 2"></li>
+                <li class="carousel-slide"><img th:src="@{/img/carrusel3.webp}" alt="Promoción 3"></li>
+                <li class="carousel-slide"><img th:src="@{/img/banner-1.png}" alt="Promoción 4"></li>
+            </ul>
+        </div>
+        <button class="carousel-btn right" aria-label="Siguiente promoción">›</button>
+
+        <div class="carousel-indicators" role="tablist" aria-label="Indicadores de promociones"></div>
+    </div>
 </section>
 <!-- Fin: Carrusel de Promociones -->
 
 <section class="contenedor_ofertas">
-  <div class="oferta_chela">
-    <img src="/img/ofertachela.jpg" alt="Cerveza con Ceviche">
-    <div class="texto">
-      <h4>Oferta de la semana</h4>
-      <p>Llévate una promo de resurrección, incluye ceviche + pota + cerveza Pilsen de 500 ml</p>
+    <div class="oferta_chela">
+        <img src="/img/ofertachela.jpg" alt="Cerveza con Ceviche">
+        <div class="texto">
+            <h4>Oferta de la semana</h4>
+            <p>Llévate una promo de resurrección, incluye ceviche + pota + cerveza Pilsen de 500 ml</p>
+        </div>
     </div>
-  </div>
 
-  <div class="oferta_mariscos">
-    <img src="/img/promo22.jpg" alt="Arroz con mariscos">
-    <div class="texto">
-      <h4>Tradicional cevichero</h4>
-      <p>Llévate una promo de arroz con mariscos familiar a tan solo s/30 soles </p>
+    <div class="oferta_mariscos">
+        <img src="/img/promo22.jpg" alt="Arroz con mariscos">
+        <div class="texto">
+            <h4>Tradicional cevichero</h4>
+            <p>Llévate una promo de arroz con mariscos familiar a tan solo s/30 soles </p>
+        </div>
     </div>
-  </div>
 </section>
 
 
 <!------------------------------------------------------------------------------------------------------>
 <section class="contenedor_ofertas2" role="region" aria-label="Promociones secundarias">
-  <article class="oferta_ceviche promo-card">
-    <img src="/img/promo3.png" alt="Combo cevichero - Oferta familiar">
-    <div class="texto">
-      <h4>Oferta mega-familiar</h4>
-      <p>Esta promoción mega-familiar está hecha con el sabor tradicional del Olímpico</p>
-      <a href="#" class="promo-btn">Pedir ahora</a>
-    </div>
-  </article>
+    <article class="oferta_ceviche promo-card">
+        <img src="/img/promo3.png" alt="Combo cevichero - Oferta familiar">
+        <div class="texto">
+            <h4>Oferta mega-familiar</h4>
+            <p>Esta promoción mega-familiar está hecha con el sabor tradicional del Olímpico</p>
+            <a href="#" class="promo-btn">Pedir ahora</a>
+        </div>
+    </article>
 
-  <article class="oferta_mariscos promo-card">
-    <img src="/img/promo4.png" alt="Leche de tigre con arroz con mariscos">
-    <div class="texto">
-      <h4>Promo Resurrección</h4>
-      <p>Leche de tigre con arroz con mariscos a tan solo S/20 para curar la resaca</p>
-      <a href="../html/promociones.html" class="promo-btn">Ver promoción</a>
-    </div>
-  </article>
+    <article class="oferta_mariscos promo-card">
+        <img src="/img/promo4.png" alt="Leche de tigre con arroz con mariscos">
+        <div class="texto">
+            <h4>Promo Resurrección</h4>
+            <p>Leche de tigre con arroz con mariscos a tan solo S/20 para curar la resaca</p>
+            <a href="../html/promociones.html" class="promo-btn">Ver promoción</a>
+        </div>
+    </article>
 </section>
 
 
 <!------------------------------------------------------------------------------------------------------>
-        <div class="contenedor">
+<div class="contenedor">
 
-            <!-- CAMBIO #3: este botón para cerrar debe funcionar con JS -->
-            <span class="icono-cerrar"><ion-icon name="close-outline"></ion-icon></span>
+    <!-- CAMBIO #3: este botón para cerrar debe funcionar con JS -->
+    <span class="icono-cerrar"><ion-icon name="close-outline"></ion-icon></span>
 
+    <!-- MENSAJES DEL REGISTRO -->
+    <div th:if="${exito}" class="alert alert-success">
+        <span th:text="${exito}"></span>
+    </div>
 
-            <!-- LOGIN -->
-            <div class="form-box login">
-                <h2>Iniciar Sesión</h2>
+    <div th:if="${error}" class="alert alert-danger">
+        <span th:text="${error}"></span>
+    </div>
 
-                <!-- CAMBIO #4: el form YA está bien apuntado -->
-                <form action="/login" method="POST">
+    <!-- LOGIN -->
+    <!-- REGISTRO -->
 
-                    <!-- CAMBIO #5: tus íconos están bien -->
-                    <div class="input-box">
-                        <span class="icon"><ion-icon name="mail-outline"></ion-icon></span>
-
-                        <!-- CAMBIO #6: el campo debe llamarse username -->
-                        <input type="text" name="username" required>
-                        <label>Usuario</label>
-                    </div>
-
-                    <div class="input-box">
-                        <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
-                        <input type="password" name="password" required>
-                        <label>Contraseña</label>
-                    </div>
-
-                    <button type="submit" class="btn">Login</button>
-
-                    <div class="registro">
-                        <!-- CAMBIO #7: este link NECESARIO para abrir registro -->
-                        <p>No tienes una cuenta? <a class="register-link">Registrarme</a></p>
-                    </div>
-
-                    <!-- CAMBIO #8: mensaje de error para login -->
-                    <p style="color:red;" th:if="${error}">[[${error}]]</p>
-
-                </form>
-            </div>
-
-
-            <!-- REGISTRO -->
-            <div class="form-box registro">
-                <h2>Registro</h2>
-
-                <!-- CAMBIO #9: el form ya apunta al controlador correcto -->
-                <form action="/registro" method="POST">
-
-                    <!-- TODOS LOS CAMPOS ESTÁN BIEN -->
-                    <div class="input-box">
-                        <input type="text" name="nombreCompleto" required>
-                        <label>Apellidos y Nombres</label>
-                    </div>
-
-                    <div class="input-box">
-                        <input type="text" name="username" required>
-                        <label>Nombre Usuario</label>
-                    </div>
-
-                    <div class="input-box">
-                        <input type="email" name="email" required>
-                        <label>Email</label>
-                    </div>
-
-                    <div class="input-box">
-                        <input type="password" name="password" required>
-                        <label>Contraseña</label>
-                    </div>
-
-                    <div class="input-box">
-                        <input type="text" name="dni" required>
-                        <label>DNI</label>
-                    </div>
-
-                    <div class="input-box">
-                        <input type="text" name="telefono" required>
-                        <label>Teléfono</label>
-                    </div>
-
-                    <div class="input-box">
-                        <input type="text" name="direccion" required>
-                        <label>Dirección</label>
-                    </div>
-
-                    <div class="terminos">
-                        <label><input type="checkbox" required> Acepto Términos y Condiciones</label>
-                    </div>
-
-                    <button type="submit" class="btn">Registrarme</button>
-
-                    <!-- CAMBIO #10: link para regresar al login -->
-                    <p>¿Ya tienes cuenta? <a class="login-link">Iniciar Sesión</a></p>
-
-                </form>
-            </div>
-        </div>
     <footer class="footer">
-  <div class="footer-container">
+        <div class="footer-container">
 
-    <div class="footer-col">
-      <h3>El Olímpico</h3>
-      <ul>
-        <li><a href="/html/sobre_nosotros.html">Historia</a></li>
-        <li><a href="/html/sobre_nosotros.html">Misión</a></li>
-        <li><a href="/html/sobre_nosotros.html">Visión</a></li>
-        <li><a href="/html/sobre_nosotros.html">El Olímpico Sostenible</a></li>
-      </ul>
-    </div>
+            <div class="footer-col">
+                <h3>El Olímpico</h3>
+                <ul>
+                    <li><a href="/html/sobre_nosotros.html">Historia</a></li>
+                    <li><a href="/html/sobre_nosotros.html">Misión</a></li>
+                    <li><a href="/html/sobre_nosotros.html">Visión</a></li>
+                    <li><a href="/html/sobre_nosotros.html">El Olímpico Sostenible</a></li>
+                </ul>
+            </div>
 
-    <div class="footer-col">
-      <h3>Servicios</h3>
-      <ul>
-        <li><a href="#">Delivery</a></li>
-        <li><a href="#">Reservas</a></li>
-      </ul>
-    </div>
+            <div class="footer-col">
+                <h3>Servicios</h3>
+                <ul>
+                    <li><a href="#">Delivery</a></li>
+                    <li><a href="#">Reservas</a></li>
+                </ul>
+            </div>
 
-    <div class="footer-col">
-      <h3>Métodos de Pago</h3>
-      <div class="metodos-pago">
-        <img src="/img/visa.png" alt="Visa">
-        <img src="/img/yape.png" alt="Yape">
-        <img src="/img/bbva.png" alt="BBVA">
-        <img src="/img/efectivo.png" alt="Efectivo">
-      </div>
-    </div>
+            <div class="footer-col">
+                <h3>Métodos de Pago</h3>
+                <div class="metodos-pago">
+                    <img src="/img/visa.png" alt="Visa">
+                    <img src="/img/yape.png" alt="Yape">
+                    <img src="/img/bbva.png" alt="BBVA">
+                    <img src="/img/efectivo.png" alt="Efectivo">
+                </div>
+            </div>
 
-    <div class="footer-col">
-      <h3>Contáctanos</h3>
-      <ul>
-        <li><a href="#">Escríbenos</a></li>
-        <li><a href="#">Trabaja con nosotros</a></li>
-        <li><a href="#">Libro de Reclamaciones</a></li>
-      </ul>
-    </div>
+            <div class="footer-col">
+                <h3>Contáctanos</h3>
+                <ul>
+                    <li><a href="#">Escríbenos</a></li>
+                    <li><a href="#">Trabaja con nosotros</a></li>
+                    <li><a href="#">Libro de Reclamaciones</a></li>
+                </ul>
+            </div>
 
-  </div>
-  <div class="footer-bottom">
-    <p>© 2025 El Olímpico - Todos los derechos reservados</p>
-  </div>
-</footer>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 El Olímpico - Todos los derechos reservados</p>
+        </div>
+    </footer>
 
-    <a href="https://api.whatsapp.com/send?phone=51960743169&text=Hola%20Cevichería%20El%20Olímpico,%20quisiera%20hacer%20una%20consulta!" 
-   class="whatsapp-float" target="_blank" rel="noopener" aria-label="Consultar dudas por WhatsApp">
-    <ion-icon name="logo-whatsapp"></ion-icon>
+    <a href="https://api.whatsapp.com/send?phone=51960743169&text=Hola%20Cevichería%20El%20Olímpico,%20quisiera%20hacer%20una%20consulta!"
+       class="whatsapp-float" target="_blank" rel="noopener" aria-label="Consultar dudas por WhatsApp">
+        <ion-icon name="logo-whatsapp"></ion-icon>
     </a>
 
-    <a href="https://www.instagram.com/alferox01/" 
-   class="instagram-float" target="_blank" rel="noopener" 
-   aria-label="Visítanos en Instagram">
-    <ion-icon name="logo-instagram"></ion-icon>
-</a>
+    <a href="https://www.instagram.com/alferox01/"
+       class="instagram-float" target="_blank" rel="noopener"
+       aria-label="Visítanos en Instagram">
+        <ion-icon name="logo-instagram"></ion-icon>
+    </a>
 
-<a href="https://www.facebook.com/sebastian.fernandez.882059" 
-   class="facebook-float" target="_blank" rel="noopener" aria-label="Síguenos en Facebook">
-    <ion-icon name="logo-facebook"></ion-icon>
-</a>
+    <a href="https://www.facebook.com/sebastian.fernandez.882059"
+       class="facebook-float" target="_blank" rel="noopener" aria-label="Síguenos en Facebook">
+        <ion-icon name="logo-facebook"></ion-icon>
+    </a>
 
-<a href="https://x.com/AlonsoMedr31941" 
-   class="twitter-float" target="_blank" rel="noopener" aria-label="Síguenos en Twitter">
-    <ion-icon name="logo-twitter"></ion-icon>
-</a>
+    <a href="https://x.com/AlonsoMedr31941"
+       class="twitter-float" target="_blank" rel="noopener" aria-label="Síguenos en Twitter">
+        <ion-icon name="logo-twitter"></ion-icon>
+    </a>
 
     <script src="/js/script.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script>
+        function toggleUserMenu() {
+            const dd = document.getElementById('userDropdown');
+            const btn = document.getElementById('userBtn');
+            if (!dd) return;
+            const isOpen = dd.style.display === 'block';
+            dd.style.display = isOpen ? 'none' : 'block';
+            btn.setAttribute('aria-expanded', String(!isOpen));
+        }
+
+        // Cerrar dropdown al hacer click fuera
+        document.addEventListener('click', function(e) {
+            const dd = document.getElementById('userDropdown');
+            const btn = document.getElementById('userBtn');
+            if (!dd || !btn) return;
+            if (!btn.contains(e.target) && !dd.contains(e.target)) {
+                dd.style.display = 'none';
+                btn.setAttribute('aria-expanded', 'false');
+            }
+        });
+    </script>
 </body>
 </html>

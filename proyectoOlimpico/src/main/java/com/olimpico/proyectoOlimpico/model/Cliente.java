@@ -11,12 +11,8 @@ import java.util.UUID;
 @Table(name = "Cliente")
 public class Cliente {
     @Id
-    @Column(name = "id_cliente")
-    private String id_cliente;
-
-    private String nombre_cliente;
-
-    private String apellido_cliente;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id_cliente;
 
     private String numero_documento;
 
@@ -33,4 +29,5 @@ public class Cliente {
 
     @OneToOne(mappedBy = "cliente", cascade = CascadeType.ALL)
     private Carrito carrito;
+
 }

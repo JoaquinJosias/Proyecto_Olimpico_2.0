@@ -1,0 +1,65 @@
+<!-- html -->
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/estilos.css">
+    <title>Registrar Proveedores</title>
+</head>
+<body>
+<div id="registroContainer">
+    <img src="/img/logo-olimpico.png" alt="logo-olimpico" id="logo-olimpico">
+    <h2>Registro Proveedores</h2>
+
+    <div th:if=${param.exito}>
+        <div class="alert alert-info">Se ha registrado exitosamente a
+            la aplicación</div>
+    </div>
+
+    <form th:action="@{/proveedor}" th:object="${proveedor}" method="post" id="formProveedor" novalidate>
+
+        <label>Razón Social:
+            <input type="text" th:field="*{razonSocial}" required />
+        </label>
+        <div th:if="${#fields.hasErrors('razonSocial')}" th:errors="*{razonSocial}"></div>
+
+        <label>Nombre Comercial:
+            <input type="text" th:field="*{nombreComercial}" />
+        </label>
+        <div th:if="${#fields.hasErrors('nombreComercial')}" th:errors="*{nombreComercial}"></div>
+
+        <label>RUC:
+            <input type="text" th:field="*{ruc}" pattern="\d{11}" title="Debe tener 11 dígitos" required />
+        </label>
+        <div th:if="${#fields.hasErrors('ruc')}" th:errors="*{ruc}"></div>
+
+        <label>Teléfono:
+            <input type="tel" th:field="*{telefono}" pattern="\+?[0-9\-\s]{7,15}" />
+        </label>
+        <div th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></div>
+
+        <label>Correo Electrónico:
+            <input type="email" th:field="*{email}" required />
+        </label>
+        <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+
+        <label>Dirección:
+            <input type="text" th:field="*{direccion}" />
+        </label>
+        <div th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}"></div>
+
+        <label>Estado:
+            <select th:field="*{estado}">
+                <option value="activo">Activo</option>
+                <option value="inactivo">Inactivo</option>
+            </select>
+        </label>
+        <div th:if="${#fields.hasErrors('estado')}" th:errors="*{estado}"></div>
+
+        <button type="submit">Registrar</button>
+    </form>
+</div>
+
+</body>
+</html>

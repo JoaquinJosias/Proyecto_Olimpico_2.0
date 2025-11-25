@@ -20,8 +20,26 @@
             <a th:href="@{/reserva}">Reserva</a>
             <a th:href="@{/sobre_nosotros}">Sobre Nosotros</a>
             <a th:href="@{/ubicacion}">Ubicacion</a>
-            <button class="btnLogin">Login</button>   
+            <!-- Si no hay usuario en sesión -->
+            <a th:if="${session.usuarioId == null}" th:href="@{/login}" class="btnLogin" role="button">Login</a>
+
+            <!-- Si hay usuario en sesión: icono con dropdown -->
+            <div th:if="${session.usuarioId != null}" class="user-menu" style="position:relative; display:inline-block; margin-left:16px;">
+                <button id="userBtn" class="user-btn" type="button" aria-haspopup="true" aria-expanded="false"
+                        onclick="toggleUserMenu()" title="Cuenta" style="background:transparent;border:none;cursor:pointer;padding:6px;">
+                    <ion-icon name="person-circle-outline" style="font-size:1.9rem;"></ion-icon>
+                </button>
+
+                <div id="userDropdown" class="user-dropdown" role="menu"
+                     style="display:none; position:absolute; right:0; margin-top:8px; background:#fff; border:1px solid #ddd; box-shadow:0 4px 12px rgba(0,0,0,.08); min-width:180px; z-index:50; padding:8px; border-radius:4px;">
+                    <div class="user-name" style="padding:6px 8px; font-weight:600; color:#333;" th:text="${session.usuarioNombre}">Usuario</div>
+                    <hr style="margin:6px 0;">
+                    <a th:href="@{/perfil}" role="menuitem" style="display:block; padding:6px 8px; color:#333; text-decoration:none;">Perfil</a>
+                    <a th:href="@{/logout}" role="menuitem" style="display:block; padding:6px 8px; color:#c00; text-decoration:none;">Cerrar sesión</a>
+                </div>
+            </div>
         </nav>
+            </div>
         </header>
 
 
@@ -196,4 +214,25 @@
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
+<script>
+    function toggleUserMenu() {
+        const dd = document.getElementById('userDropdown');
+        const btn = document.getElementById('userBtn');
+        if (!dd) return;
+        const isOpen = dd.style.display === 'block';
+        dd.style.display = isOpen ? 'none' : 'block';
+        btn.setAttribute('aria-expanded', String(!isOpen));
+    }
+
+    // Cerrar dropdown al hacer click fuera
+    document.addEventListener('click', function(e) {
+        const dd = document.getElementById('userDropdown');
+        const btn = document.getElementById('userBtn');
+        if (!dd || !btn) return;
+        if (!btn.contains(e.target) && !dd.contains(e.target)) {
+            dd.style.display = 'none';
+            btn.setAttribute('aria-expanded', 'false');
+        }
+    });
+</script>
 </html>

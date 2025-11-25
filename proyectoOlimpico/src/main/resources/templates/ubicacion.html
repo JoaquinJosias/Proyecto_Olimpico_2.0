@@ -9,232 +9,277 @@
     <title>Ubicacion</title>
 </head>
 <body>
-        <header>
-        <div class="brand">
-            <img src="./img/logo-olimpico.png"class="logo-img">
-            <h1 class="titulo">EL OLIMPICO</h1>
-        </div>
-        <nav class="navigation">
-            <a th:href="@{/carta}">Nuestra Carta</a>
-            <a th:href="@{/promociones}">Promociones</a>
-            <a th:href="@{/reserva}">Reserva</a>
-            <a th:href="@{/sobre_nosotros}">Sobre Nosotros</a>
-            <a th:href="@{/ubicacion}">Ubicacion</a>
-            <button class="btnLogin">Login</button>   
-        </nav>
-        </header>
+<header>
+    <div class="brand">
+        <img src="./img/logo-olimpico.png" class="logo-img">
+        <h1 class="titulo">EL OLIMPICO</h1>
+    </div>
+    <nav class="navigation">
+        <a th:href="@{/carta}">Nuestra Carta</a>
+        <a th:href="@{/promociones}">Promociones</a>
+        <a th:href="@{/reserva}">Reserva</a>
+        <a th:href="@{/sobre_nosotros}">Sobre Nosotros</a>
+        <a th:href="@{/ubicacion}">Ubicacion</a>
+        <!-- Si no hay usuario en sesión -->
+        <a th:if="${session.usuarioId == null}" th:href="@{/login}" class="btnLogin" role="button">Login</a>
 
-        <main class="container">
+        <!-- Si hay usuario en sesión: icono con dropdown -->
+        <div th:if="${session.usuarioId != null}" class="user-menu"
+             style="position:relative; display:inline-block; margin-left:16px;">
+            <button id="userBtn" class="user-btn" type="button" aria-haspopup="true" aria-expanded="false"
+                    onclick="toggleUserMenu()" title="Cuenta"
+                    style="background:transparent;border:none;cursor:pointer;padding:6px;">
+                <ion-icon name="person-circle-outline" style="font-size:1.9rem;"></ion-icon>
+            </button>
+
+            <div id="userDropdown" class="user-dropdown" role="menu"
+                 style="display:none; position:absolute; right:0; margin-top:8px; background:#fff; border:1px solid #ddd; box-shadow:0 4px 12px rgba(0,0,0,.08); min-width:180px; z-index:50; padding:8px; border-radius:4px;">
+                <div class="user-name" style="padding:6px 8px; font-weight:600; color:#333;"
+                     th:text="${session.usuarioNombre}">Usuario
+                </div>
+                <hr style="margin:6px 0;">
+                <a th:href="@{/perfil}" role="menuitem"
+                   style="display:block; padding:6px 8px; color:#333; text-decoration:none;">Perfil</a>
+                <a th:href="@{/logout}" role="menuitem"
+                   style="display:block; padding:6px 8px; color:#c00; text-decoration:none;">Cerrar sesión</a>
+            </div>
+        </div>
+    </nav>
+    </div>
+</header>
+
+<main class="container">
     <section class="search-section">
-      <label for="search" class="search-label">BUSCAR POR UBICACIÓN:</label>
-      <input id="search" type="search" class="search-input" placeholder="Escribe zona, nombre o dirección..." />
+        <label for="search" class="search-label">BUSCAR POR UBICACIÓN:</label>
+        <input id="search" type="search" class="search-input" placeholder="Escribe zona, nombre o dirección..."/>
     </section>
 
     <section class="cards-grid">
-      <article class="card" data-title="PUENTE_PIEDRA" data-sub="Av. Industrial 321, Puente Piedra 15122">
-        <img src="./img/Img Ubicacion/puente_piedra.jpeg" alt="icono" class="card-icon" />
-        <div class="card-content">
-          <h3 class="card-title">PUENTE PIEDRA</h3>
-          <p class="card-sub">Av. Industrial 321, Puente Piedra 15122</p>
-        </div>
-        <div class="card-actions">
-          <a class="btn btn-primary card-link" href="detalle_puente.html">Ver</a>
-        </div>
-      </article>
+        <article class="card" data-title="PUENTE_PIEDRA" data-sub="Av. Industrial 321, Puente Piedra 15122">
+            <img src="./img/Img Ubicacion/puente_piedra.jpeg" alt="icono" class="card-icon"/>
+            <div class="card-content">
+                <h3 class="card-title">PUENTE PIEDRA</h3>
+                <p class="card-sub">Av. Industrial 321, Puente Piedra 15122</p>
+            </div>
+            <div class="card-actions">
+                <a class="btn btn-primary card-link" href="detalle_puente.html">Ver</a>
+            </div>
+        </article>
 
-      <article class="card" data-title="SAN_MARTIN_DE_PORRES" data-sub="Av. Alfredo Mendiola 4080, San Martín de Porres 15311">
-        <img src="./img/Img Ubicacion/san_martin1.jpeg" alt="icono" class="card-icon" />
-        <div class="card-content">
-          <h3 class="card-title">SAN MARTIN DE PORRES</h3>
-          <p class="card-sub">Av. Alfredo Mendiola 4080, San Martín de Porres 15311</p>
-        </div>
-        <div class="card-actions">
-          <a class="btn btn-primary card-link" href="detalle_smp.html">Ver</a>
-        </div>
-      </article>
+        <article class="card" data-title="SAN_MARTIN_DE_PORRES"
+                 data-sub="Av. Alfredo Mendiola 4080, San Martín de Porres 15311">
+            <img src="./img/Img Ubicacion/san_martin1.jpeg" alt="icono" class="card-icon"/>
+            <div class="card-content">
+                <h3 class="card-title">SAN MARTIN DE PORRES</h3>
+                <p class="card-sub">Av. Alfredo Mendiola 4080, San Martín de Porres 15311</p>
+            </div>
+            <div class="card-actions">
+                <a class="btn btn-primary card-link" href="detalle_smp.html">Ver</a>
+            </div>
+        </article>
 
-      <article class="card" data-title="LOS_OLIVOS" data-sub="Av. Carlos Izaguirre 938, Los Olivos 15301">
-        <img src="./img/Img Ubicacion/los_olivos.jpeg" alt="icono" class="card-icon" />
-        <div class="card-content">
-          <h3 class="card-title">LOS OLIVOS</h3>
-          <p class="card-sub">Av. Carlos Izaguirre 938, Los Olivos 15301</p>
-        </div>
-        <div class="card-actions">
-          <a class="btn btn-primary card-link" href="detalle_los_olivos.html">Ver</a>
-        </div>
-      </article>
+        <article class="card" data-title="LOS_OLIVOS" data-sub="Av. Carlos Izaguirre 938, Los Olivos 15301">
+            <img src="./img/Img Ubicacion/los_olivos.jpeg" alt="icono" class="card-icon"/>
+            <div class="card-content">
+                <h3 class="card-title">LOS OLIVOS</h3>
+                <p class="card-sub">Av. Carlos Izaguirre 938, Los Olivos 15301</p>
+            </div>
+            <div class="card-actions">
+                <a class="btn btn-primary card-link" href="detalle_los_olivos.html">Ver</a>
+            </div>
+        </article>
 
-      <article class="card" data-title="SAN MARTIN DE PORRES" data-sub="Av. Carlos Izaguirre 1540, San Martín de Porres 15109">
-        <img src="./img/Img Ubicacion/san_martin2.png" alt="icono" class="card-icon" />
-        <div class="card-content">
-          <h3 class="card-title">SAN MARTIN DE PORRES</h3>
-          <p class="card-sub">Av. Carlos Izaguirre 1540, San Martín de Porres 15109</p>
-        </div>
-        <div class="card-actions">
-          <a class="btn btn-primary card-link" href="detalle_san_martin_2.html">Ver</a>
-        </div>
-      </article>
+        <article class="card" data-title="SAN MARTIN DE PORRES"
+                 data-sub="Av. Carlos Izaguirre 1540, San Martín de Porres 15109">
+            <img src="./img/Img Ubicacion/san_martin2.png" alt="icono" class="card-icon"/>
+            <div class="card-content">
+                <h3 class="card-title">SAN MARTIN DE PORRES</h3>
+                <p class="card-sub">Av. Carlos Izaguirre 1540, San Martín de Porres 15109</p>
+            </div>
+            <div class="card-actions">
+                <a class="btn btn-primary card-link" href="detalle_san_martin_2.html">Ver</a>
+            </div>
+        </article>
     </section>
-  </main>
+</main>
 
-  <!-- Overlay de carga -->
-  <div id="loading-overlay" class="loading-overlay hidden" aria-hidden="true">
+<!-- Overlay de carga -->
+<div id="loading-overlay" class="loading-overlay hidden" aria-hidden="true">
     <div class="loading-box" role="status" aria-live="polite">
-      <div class="spinner" aria-hidden="true"></div>
-      <div class="loading-text">Cargando...</div>
+        <div class="spinner" aria-hidden="true"></div>
+        <div class="loading-text">Cargando...</div>
     </div>
-  </div>
+</div>
 
-  <script src="./js/ubicacion.js"></script>
-
-
+<script src="./js/ubicacion.js"></script>
 
 
 <!------------------------------------------------------------------------------------------------------>
 
 
+<div class="contenedor">
+    <span class="icono-cerrar"><ion-icon name="close-outline"></ion-icon></span>
 
-    <div class="contenedor">
-        <span class="icono-cerrar"><ion-icon name="close-outline"></ion-icon></span>
+    <div class="form-box login">
+        <h2>Iniciar Sesión</h2>
+        <form action="">
+            <div class="input-box">
+                <span class="icon"><ion-icon name="mail-outline"></ion-icon>  </span>
+                <input type="email" required>
+                <label>Usuario</label>
+            </div>
+            <div class="input-box">
+                <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
+                <input type="password" required>
+                <label>Contraseña</label>
+            </div>
+            <button type="submit" class="btn">Login</button>
+            <div class="registro">
+                <p>No tienes una cuenta? <a class="register-link">Registrarme</a></p>
+            </div>
+        </form>
+    </div>
 
-        <div class="form-box login">
-            <h2>Iniciar Sesión</h2>
-            <form action="">
-                <div class="input-box">
-                    <span class="icon"><ion-icon name="mail-outline"></ion-icon>  </span>
-                    <input type="email" required>
-                    <label >Usuario</label>
-                </div>
-                <div class="input-box">
-                    <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
-                    <input type="password" required>
-                    <label >Contraseña</label>
-                </div>
-                <button type="submit" class="btn">Login</button>
-                <div class="registro">
-                    <p>No tienes una cuenta? <a class="register-link">Registrarme</a></p>
-                </div>
-            </form>
+
+    <div class="form-box registro">
+        <h2>Registro</h2>
+        <form action="">
+            <div class="input-box">
+                <span class="icon"><ion-icon name="person-outline"></ion-icon>  </span>
+                <input type="text" required>
+                <label>Apellidos y Nombres</label>
+            </div>
+            <div class="input-box">
+                <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
+                <input type="email" required>
+                <label>Nombre Usuario</label>
+            </div>
+            <div class="input-box">
+                <span class="icon"><ion-icon name="mail-outline"></ion-icon></span>
+                <input type="email" required>
+                <label>Email</label>
+            </div>
+            <div class="input-box">
+                <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
+                <input type="password" required>
+                <label>Contraseña</label>
+            </div>
+            <div class="input-box">
+                <span class="icon"><ion-icon name="id-card-outline"></ion-icon>
+                    </ion-icon></span>
+                <input type="text" required>
+                <label>DNI</label>
+            </div>
+            <div class="input-box">
+                <span class="icon"><ion-icon name="call-outline"></ion-icon></span>
+                <input type="text" required>
+                <label>Telefono</label>
+            </div>
+            <div class="input-box">
+                <span class="icon"><ion-icon name="compass-outline"></ion-icon></span>
+                <input type="text" required>
+                <label>Direccíon</label>
+            </div>
+            <div class="terminos">
+                <label for=""><input type="checkbox">Acepto Terminos y Condiciones</label>
+            </div>
+            <button type="submit" class="btn">Registrarme</button>
+            <div class="registro">
+                <p>Tienes una cuenta? <a class="login-link">Iniciar Sesión</a></p>
+            </div>
+        </form>
+    </div>
+</div>
+<footer class="footer">
+    <div class="footer-container">
+
+        <div class="footer-col">
+            <h3>El Olímpico</h3>
+            <ul>
+                <li><a href="/html/sobre_nosotros.html">Historia</a></li>
+                <li><a href="/html/sobre_nosotros.html">Misión</a></li>
+                <li><a href="/html/sobre_nosotros.html">Visión</a></li>
+                <li><a href="/html/sobre_nosotros.html">El Olímpico Sostenible</a></li>
+            </ul>
         </div>
 
-
-        <div class="form-box registro">
-            <h2>Registro</h2>
-            <form action="">
-                <div class="input-box">
-                    <span class="icon"><ion-icon name="person-outline"></ion-icon>  </span>
-                    <input type="text" required>
-                    <label >Apellidos y Nombres</label>
-                </div>
-                <div class="input-box">
-                    <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
-                    <input type="email" required>
-                    <label >Nombre Usuario</label>
-                </div>
-                <div class="input-box">
-                    <span class="icon"><ion-icon name="mail-outline"></ion-icon></span>
-                    <input type="email" required>
-                    <label >Email</label>
-                </div>
-                <div class="input-box">
-                    <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
-                    <input type="password" required>
-                    <label >Contraseña</label>
-                </div>
-                <div class="input-box">
-                    <span class="icon"><ion-icon name="id-card-outline"></ion-icon></ion-icon></span>
-                    <input type="text" required>
-                    <label >DNI</label>
-                </div>
-                <div class="input-box">
-                    <span class="icon"><ion-icon name="call-outline"></ion-icon></span>
-                    <input type="text" required>
-                    <label >Telefono</label>
-                </div>
-                <div class="input-box">
-                    <span class="icon"><ion-icon name="compass-outline"></ion-icon></span>
-                    <input type="text" required>
-                    <label >Direccíon</label>
-                </div>
-                <div class="terminos">
-                    <label for=""><input type="checkbox">Acepto Terminos y Condiciones</label>
-                </div>
-                <button type="submit" class="btn">Registrarme</button>
-                <div class="registro">
-                    <p>Tienes una cuenta? <a class="login-link">Iniciar Sesión</a></p>
-                </div>
-            </form>
+        <div class="footer-col">
+            <h3>Servicios</h3>
+            <ul>
+                <li><a href="#">Delivery</a></li>
+                <li><a href="#">Reservas</a></li>
+            </ul>
         </div>
-    </div>
-    <footer class="footer">
-  <div class="footer-container">
 
-    <div class="footer-col">
-      <h3>El Olímpico</h3>
-      <ul>
-        <li><a href="/html/sobre_nosotros.html">Historia</a></li>
-        <li><a href="/html/sobre_nosotros.html">Misión</a></li>
-        <li><a href="/html/sobre_nosotros.html">Visión</a></li>
-        <li><a href="/html/sobre_nosotros.html">El Olímpico Sostenible</a></li>
-      </ul>
-    </div>
+        <div class="footer-col">
+            <h3>Métodos de Pago</h3>
+            <div class="metodos-pago">
+                <img src="./img/visa.png" alt="Visa">
+                <img src="./img/yape.png" alt="Yape">
+                <img src="./img/bbva.png" alt="BBVA">
+                <img src="./img/efectivo.png" alt="Efectivo">
+            </div>
+        </div>
 
-    <div class="footer-col">
-      <h3>Servicios</h3>
-      <ul>
-        <li><a href="#">Delivery</a></li>
-        <li><a href="#">Reservas</a></li>
-      </ul>
-    </div>
+        <div class="footer-col">
+            <h3>Contáctanos</h3>
+            <ul>
+                <li><a href="#">Escríbenos</a></li>
+                <li><a href="#">Trabaja con nosotros</a></li>
+                <li><a href="#">Libro de Reclamaciones</a></li>
+            </ul>
+        </div>
 
-    <div class="footer-col">
-      <h3>Métodos de Pago</h3>
-      <div class="metodos-pago">
-        <img src="./img/visa.png" alt="Visa">
-        <img src="./img/yape.png" alt="Yape">
-        <img src="./img/bbva.png" alt="BBVA">
-        <img src="./img/efectivo.png" alt="Efectivo">
-      </div>
     </div>
-
-    <div class="footer-col">
-      <h3>Contáctanos</h3>
-      <ul>
-        <li><a href="#">Escríbenos</a></li>
-        <li><a href="#">Trabaja con nosotros</a></li>
-        <li><a href="#">Libro de Reclamaciones</a></li>
-      </ul>
+    <div class="footer-bottom">
+        <p>© 2025 El Olímpico - Todos los derechos reservados</p>
     </div>
-
-  </div>
-  <div class="footer-bottom">
-    <p>© 2025 El Olímpico - Todos los derechos reservados</p>
-  </div>
 </footer>
 
-    <a href="https://api.whatsapp.com/send?phone=51960743169&text=Hola%20Cevichería%20El%20Olímpico,%20quisiera%20hacer%20una%20consulta!" 
+<a href="https://api.whatsapp.com/send?phone=51960743169&text=Hola%20Cevichería%20El%20Olímpico,%20quisiera%20hacer%20una%20consulta!"
    class="whatsapp-float" target="_blank" rel="noopener" aria-label="Consultar dudas por WhatsApp">
     <ion-icon name="logo-whatsapp"></ion-icon>
-    </a>
+</a>
 
-    <a href="https://www.instagram.com/alferox01/" 
-   class="instagram-float" target="_blank" rel="noopener" 
+<a href="https://www.instagram.com/alferox01/"
+   class="instagram-float" target="_blank" rel="noopener"
    aria-label="Visítanos en Instagram">
     <ion-icon name="logo-instagram"></ion-icon>
 </a>
 
-<a href="https://www.facebook.com/sebastian.fernandez.882059" 
+<a href="https://www.facebook.com/sebastian.fernandez.882059"
    class="facebook-float" target="_blank" rel="noopener" aria-label="Síguenos en Facebook">
     <ion-icon name="logo-facebook"></ion-icon>
 </a>
 
-<a href="https://x.com/AlonsoMedr31941" 
+<a href="https://x.com/AlonsoMedr31941"
    class="twitter-float" target="_blank" rel="noopener" aria-label="Síguenos en Twitter">
     <ion-icon name="logo-twitter"></ion-icon>
 </a>
 
-    <script src="./js/script.js"></script>
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script src="./js/script.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
+<script>
+    function toggleUserMenu() {
+        const dd = document.getElementById('userDropdown');
+        const btn = document.getElementById('userBtn');
+        if (!dd) return;
+        const isOpen = dd.style.display === 'block';
+        dd.style.display = isOpen ? 'none' : 'block';
+        btn.setAttribute('aria-expanded', String(!isOpen));
+    }
+
+    // Cerrar dropdown al hacer click fuera
+    document.addEventListener('click', function(e) {
+        const dd = document.getElementById('userDropdown');
+        const btn = document.getElementById('userBtn');
+        if (!dd || !btn) return;
+        if (!btn.contains(e.target) && !dd.contains(e.target)) {
+            dd.style.display = 'none';
+            btn.setAttribute('aria-expanded', 'false');
+        }
+    });
+</script>
 </html>

@@ -24,7 +24,7 @@ public class RolServices {
 
     //
 
-    public Rol getByIdRol(String rol)
+    public Rol getByIdRol(Long rol)
     {
         return rolRepository.findById(rol).orElse(null);
     }
@@ -38,7 +38,7 @@ public class RolServices {
 
     //
 
-    public void deleteRol(String id)
+    public void deleteRol(Long id)
     {
         rolRepository.deleteById(id);
     }
