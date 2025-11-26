@@ -1,5 +1,6 @@
 package com.olimpico.proyectoOlimpico.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,6 +17,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@JsonIgnoreProperties({"password","roles"})
 @Table(name = "Usuario", uniqueConstraints = @UniqueConstraint( columnNames= "email"))
 public class Usuario {
     @Id

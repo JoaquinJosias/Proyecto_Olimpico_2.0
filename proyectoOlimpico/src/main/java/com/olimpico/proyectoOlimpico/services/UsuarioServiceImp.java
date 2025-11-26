@@ -26,7 +26,7 @@ public class UsuarioServiceImp implements  UsuarioService{
                 usuarioRegistroDTO.getApellido(),
                 usuarioRegistroDTO.getEmail(),
                 usuarioRegistroDTO.getPassword(),
-                Arrays.asList(new Rol("ROL_ADMIN"))
+                Arrays.asList(new Rol("ROL_USER"))
         );
         return usuarioRepository.save(usuario);
     }

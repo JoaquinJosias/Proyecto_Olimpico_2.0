@@ -1,0 +1,14 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    /* RUTA ABSOLUTA desde static: /images/background.jpg */
+    background-image: url('/images/background.jpg');
+    background-size: cover;           /* cubrir toda la pantalla */
+    background-position: center;      /* centrar la imagen */
+    background-repeat: no-repeat;     /* no repetir */
+    background-attachment: fixed;     /* permanecer fijo al hacer scroll */
+    background-color: #f0f0f0;        /* color de respaldo */
+}

@@ -33,6 +33,8 @@ public class RegistroProveedorController {
     @PostMapping
     public String registrarProveedorCuenta(@ModelAttribute("proveedor") ProveedorDTO proveedorDTO,
                                            RedirectAttributes redirectAttributes) {
+        proveedorService.guardarProveedor(proveedorDTO);
+        redirectAttributes.addAttribute("exito", "true");
         return "redirect:/proveedor?exito";
     }
 }

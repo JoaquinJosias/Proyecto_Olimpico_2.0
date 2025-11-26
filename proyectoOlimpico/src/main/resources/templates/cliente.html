@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <title>Mi perfil</title>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+          crossorigin="anonymous">
+
+    <link rel="stylesheet" href="/css/estilos_background.css" />
+</head>
+<body style="background-image:url('/img/background.jpg'); background-size:cover; background-position:center; background-repeat:no-repeat;">
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" th:href="@{/}">Inicio</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container" style="margin-top:70px">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-default auth-panel">
+                <div class="panel-heading text-center">
+                    <a th:href="@{/}" class="back-link"
+                       style="float:left; margin-top:5px; color:#337ab7; text-decoration:none; font-weight:500;">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Regresar
+                    </a>
+                    <h3 class="panel-title"
+                        th:text="${cliente != null ? 'Mi perfil' : (usuario != null ? 'Mi perfil' : 'Regístrate')}">Mi perfil</h3>
+                </div>
+                <div class="panel-body">
+
+                    <div th:if="${exito != null}">
+                        <div class="alert alert-success" th:text="${exito}">Perfil guardado correctamente.</div>
+                    </div>
+
+                    <div th:if="${flash != null and flash.exito != null}">
+                        <div class="alert alert-success" th:text="${flash.exito}"></div>
+                    </div>
+
+                    <div th:if="${flash != null and flash.error != null}">
+                        <div class="alert alert-danger" th:text="${flash.error}"></div>
+                    </div>
+
+                    <div th:if="${errorMessage != null}" class="alert alert-danger" th:text="${errorMessage}"></div>
+
+                    <!-- Formulario cuando existe 'cliente' en el modelo -->
+                    <form th:if="${cliente != null}" th:action="@{/perfil}" method="post" th:object="${cliente}">
+                        <input type="hidden" th:if="${_csrf != null}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+                        <div class="form-group">
+                            <label for="dni">DNI</label>
+                            <input id="dni" class="form-control" th:field="*{dni}" placeholder="DNI" required />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="telefono">Teléfono</label>
+                            <input id="telefono" class="form-control" type="tel" th:field="*{telefono}" placeholder="Teléfono" required />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="direccion">Dirección</label>
+                            <input id="direccion" class="form-control" type="text" th:field="*{direccion}" placeholder="Dirección" required />
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary" th:text="'Actualizar'">Guardar</button>
+                        </div>
+
+                    </form>
+
+                    <!-- Formulario cuando existe 'usuario' en el modelo -->
+                    <form th:if="${cliente == null and usuario != null}" th:action="@{/perfil}" method="post" th:object="${usuario}">
+                        <input type="hidden" th:if="${_csrf != null}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+                        <div class="form-group">
+                            <label for="dni_u">DNI</label>
+                            <input id="dni_u" class="form-control" th:field="*{dni}" placeholder="DNI" required />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="telefono_u">Teléfono</label>
+                            <input id="telefono_u" class="form-control" type="tel" th:field="*{telefono}" placeholder="Teléfono" required />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="direccion_u">Dirección</label>
+                            <input id="direccion_u" class="form-control" type="text" th:field="*{direccion}" placeholder="Dirección" required />
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary" th:text="'Actualizar'">Guardar</button>
+                        </div>
+
+                    </form>
+
+                    <!-- Formulario de registro si no hay objeto en el modelo -->
+                    <form th:if="${cliente == null and usuario == null}" th:action="@{/perfil}" method="post">
+                        <input type="hidden" th:if="${_csrf != null}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+                        <div class="form-group">
+                            <label for="dni_reg">DNI</label>
+                            <input id="dni_reg" name="dni" class="form-control" placeholder="DNI" required />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="telefono_reg">Teléfono</label>
+                            <input id="telefono_reg" name="telefono" class="form-control" type="tel" placeholder="Teléfono" required />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="direccion_reg">Dirección</label>
+                            <input id="direccion_reg" name="direccion" class="form-control" placeholder="Dirección" required />
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary" th:text="'Registrar'">Guardar</button>
+                        </div>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+  /* estilo para el panel blanco centrado */
+  .auth-panel {
+    background: rgba(255,255,255,0.98);
+    border-radius: 6px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    padding: 0;
+    overflow: hidden;
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+
+  /* encabezado y cuerpo */
+  .auth-panel .panel-heading {
+    background: transparent;
+    border-bottom: none;
+    padding: 18px 20px;
+  }
+  .auth-panel .panel-body {
+    padding: 20px;
+  }
+
+  /* ancho máximo y centrado en pantallas grandes */
+  @media (min-width: 768px) {
+    .auth-panel {
+      max-width: 680px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  /* ajustes de título */
+  .auth-panel .panel-title {
+    margin: 0;
+    font-weight: 600;
+    color: #333;
+    font-size: 1.25em;
+  }
+
+/* aplica margin-top sin inline styles */
+  .main-container {
+      margin-top: 70px;
+  }
+</style>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+</body>
+</html>
