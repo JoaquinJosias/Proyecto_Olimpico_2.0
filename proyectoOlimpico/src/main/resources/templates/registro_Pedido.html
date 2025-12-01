@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario Pedido</title>
+    <link rel="stylesheet" href="/css/pedido.css" />
+</head>
+<body>
+     <main class="page">
+    <div class="card">
+      <header class="card-header">
+        <h2>Registro de Pedido</h2>
+      </header>
+
+      <form id="formPedido" novalidate>
+     
+        <div id="mensaje" class="mensaje" role="status" aria-live="polite"></div>
+
+       
+        <section class="section">
+          <h3>Datos del proveedor</h3>
+          <div class="grid-2">
+            <div class="field">
+              <label for="proveedor_nombre">Nombre de proveedor</label>
+              <input id="proveedor_nombre" name="proveedor_nombre" type="text" placeholder="Ingresar nombre del proveedor" required />
+            </div>
+
+            <div class="field">
+              <label for="proveedor_email">Correo electrónico - (GMAIL)</label>
+              <input id="proveedor_email" name="proveedor_email" type="email" placeholder="nombre@ejemplo.com" required />
+            </div>
+          </div>
+        </section>
+
+       
+        <section class="section">
+          <h3>Detalle del pedido</h3>
+          <div class="field">
+            <label for="detalle">Descripción del pedido</label>
+            <textarea id="detalle" name="detalle" rows="3" placeholder="Agregar descripción detallada del pedido"></textarea>
+          </div>
+        </section>
+
+      
+        <section class="section">
+          <h3>Ítems del pedido</h3>
+
+          <div class="items-card">
+            <div class="items-header">
+              <div>Unidad</div>
+              <div>Cantidad</div>
+              <div>Precio unitario</div>
+              <div>Subtotal</div>
+            </div>
+
+            <div class="items-row">
+              <div>
+                <select id="unidad" name="unidad">
+                  <option value="KG">KG</option>
+                  <option value="UN">UN</option>
+                  <option value="CAJA">CAJA</option>
+                </select>
+              </div>
+
+              <div>
+                <input id="cantidad" name="cantidad" type="number" min="0" step="1" value="0" />
+              </div>
+
+              <div>
+                <input id="precio_unitario" name="precio_unitario" type="number" min="0" step="0.01" value="0.00" />
+              </div>
+
+              <div>
+                <input id="subtotal_item" name="subtotal_item" type="text" value="S/ 0.00" readonly />
+              </div>
+            </div>
+          </div>
+        </section>
+
+      
+        <section class="section summary-section">
+          <h3></h3>
+          <div class="summary-grid">
+            <div class="summary-row">
+              <label>IGV (18%)</label>
+              <input id="igv" type="text" value="S/ 0.00" readonly />
+            </div>
+
+            <div class="summary-row">
+              <label>Total</label>
+              <input id="total" type="text" value="S/ 0.00" readonly />
+            </div>
+          </div>
+        </section>
+
+    
+        <div class="actions">
+          <button type="button" class="btn btn-secondary" id="btnCancelar">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <script src="/js/pedido.js"></script>
+
+</body>
+</html>

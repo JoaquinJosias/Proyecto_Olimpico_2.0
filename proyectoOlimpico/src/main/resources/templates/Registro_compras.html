@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario Compras</title>
+    <link rel="stylesheet" href="/css/compras.css" />
+</head>
+<body>
+    <main class="page">
+    <div class="card">
+      <header class="card-header">
+        <h1>Reporte de Facturas de Compras</h1>
+        <p class="subtitle">Registra los datos principales de tus facturas de compras para mantener tu registro actualizado.</p>
+      </header>
+
+      <form id="formFactura" novalidate>
+        <div id="mensaje" class="mensaje" role="status" aria-live="polite"></div>
+
+        <fieldset class="group">
+          <legend>Datos de la factura</legend>
+
+          <div class="grid-2">
+            <div class="field">
+              <label for="fecha_emision">Fecha de emisión</label>
+              <!-- usamos input type="date" para control nativo; si se quiere dd/mm/aaaa puede hacerse con mascaras -->
+              <input id="fecha_emision" name="fecha_emision" type="date" placeholder="dd/mm/aaaa" required />
+            </div>
+
+            <div class="field">
+              <label for="tipo_comprobante">Tipo de comprobante</label>
+              <select id="tipo_comprobante" name="tipo_comprobante" required>
+                <option value="">Selecciona un tipo (Factura, Boleta, Nota de crédito...)</option>
+                <option value="factura">Factura</option>
+                <option value="boleta">Boleta</option>
+                <option value="nota_credito">Nota de crédito</option>
+                <option value="nota_debito">Nota de débito</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="numero_factura">Número de factura</label>
+              <input id="numero_factura" name="numero_factura" type="text" placeholder="Ingresa el número de factura" required />
+            </div>
+
+            <div class="field">
+              <label for="ruc_factura">RUC de factura</label>
+              <input id="ruc_factura" name="ruc_factura" type="text" inputmode="numeric" placeholder="Ingresa el RUC asociado a la factura" required />
+            </div>
+          </div>
+        </fieldset>
+
+        <div class="actions">
+          <button type="button" class="btn btn-ghost" id="btnLimpiar">Limpiar</button>
+          <button type="submit" class="btn btn-primary">Registrar</button>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <script src="/css/compras.js"></script>
+    
+</body>
+</html>

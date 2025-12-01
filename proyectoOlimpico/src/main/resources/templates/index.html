@@ -52,10 +52,28 @@
                     R. Productos
                 </a>
                 <a th:if="${session.usuarioEsAdmin}"
-                   th:href="@{/mantenimiento}"
+                   th:href="@{/stock}"
                    role="menuitem"
                    style="display:block; padding:6px 8px; color:#333; text-decoration:none;">
-                    Mantenimiento
+                    Consultar Stock
+                </a>
+                <a th:if="${session.usuarioEsAdmin}"
+                   th:href="@{/pedido}"
+                   role="menuitem"
+                   style="display:block; padding:6px 8px; color:#333; text-decoration:none;">
+                    R.Pedido
+                </a>
+                <a th:if="${session.usuarioEsAdmin}"
+                   th:href="@{/compra}"
+                   role="menuitem"
+                   style="display:block; padding:6px 8px; color:#333; text-decoration:none;">
+                    Reporte Compra
+                </a>
+                <a th:if="${session.usuarioEsAdmin}"
+                   th:href="@{/registro_compra}"
+                   role="menuitem"
+                   style="display:block; padding:6px 8px; color:#333; text-decoration:none;">
+                    R. Compras
                 </a>
                 <a th:href="@{/logout}" role="menuitem"
                    style="display:block; padding:6px 8px; color:#c00; text-decoration:none;">Cerrar sesión</a>

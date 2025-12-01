@@ -1,0 +1,104 @@
+body {
+    font-family: Arial, sans-serif;
+    background-image: url("/img/fondo.png"); /* azul marino */
+    color: rgb(72, 144, 252);
+    margin: 0;
+    padding: 0;
+
+    
+  background-size: cover;      /* la imagen cubre toda la pantalla */
+  background-position: center; /* centrada */
+  background-repeat: no-repeat;/* no se repite */
+
+}
+
+/* Contenedor principal que tendrá formulario a la izquierda y resultados a la derecha */
+.stock-layout {
+    display: flex;
+    justify-content: flex-start; /* alinea a la izquierda */
+    align-items: flex-start;
+    padding: 20px;
+}
+
+/* Formulario */
+.stock-contenedor {
+    background-color: #000; /* negro elegante */
+    padding: 25px;
+    border-radius: 10px;
+    width: 420px;
+    box-shadow: 0 0 15px rgba(255,255,255,0.2);
+    margin-right: 30px; /* espacio para el cuadro de resultados */
+    height: 590px;
+}
+/* Labels */
+label {
+  display: block;          
+  width: 100%;             
+  margin-bottom: 8px;      
+  font-weight: bold;       
+  color: #fff;             
+  font-size: 14px;         
+}
+
+/* Inputs y selects */
+input, select {
+  width: 100%;             
+  padding: 12px;           
+  margin-bottom: 15px;     
+  border: none;            
+  border-radius: 5px;      
+  background-color: #fff;  
+  color: #000;             
+  font-size: 14px;         
+  box-sizing: border-box;  
+}
+
+
+/* Cuadro de resultados (placeholder) */
+.resultados {
+    flex: 1; 
+    background-color: #111;
+    padding: 20px;
+    border-radius: 10px;
+    min-height: 300px;
+    color: #fff;
+    box-shadow: 0 0 15px rgba(255,255,255,0.2);
+}
+
+/* Botones */
+button {
+    width: 48%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btnConsultar {
+    background-color: #1e90ff;
+    color: white;
+    margin-right: 4%;
+}
+
+.btnConsultar:hover {
+    background-color: #4682b4;
+}
+
+.btnBorrar {
+    background-color: #ff4444;
+    color: white;
+}
+
+.btnBorrar:hover {
+    background-color: #cc0000;
+}
+
+/* Mensajes */
+.mensaje {
+    text-align: center;
+    font-weight: bold;
+    margin-top: 15px;
+}
+.mensaje.ok { color: #00ff7f; }
+.mensaje.error { color: #ff6347; }
