@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,117 +8,177 @@
 </head>
 
 <body>
-    <header>
-        <div class="brand">
-            <img src="/img/logo-olimpico.png" class="logo-img">
-            <h1 class="titulo">EL OLIMPICO</h1>
+<header>
+    <div class="brand">
+        <img src="/img/logo-olimpico.png" class="logo-img">
+        <h1 class="titulo">EL OLIMPICO</h1>
+    </div>
+    <nav class="navigation">
+        <a th:href="@{/carta}">Nuestra Carta</a>
+        <a th:href="@{/promociones}">Promociones</a>
+        <a th:href="@{/reserva}">Reserva</a>
+        <a th:href="@{/sobre_nosotros}">Sobre Nosotros</a>
+        <a th:href="@{/ubicacion}">Ubicacion</a>
+
+        <!-- Si no hay usuario en sesión -->
+        <a th:if="${session.usuarioId == null}" th:href="@{/login}" >Login</a>
+
+        <!-- Si hay usuario en sesión: icono con dropdown -->
+        <div th:if="${session.usuarioId != null}" class="user-menu"
+             style="position:relative; display:inline-block; margin-left:16px;">
+            <button id="userBtn" class="user-btn" type="button" aria-haspopup="true" aria-expanded="false"
+                    onclick="toggleUserMenu()" title="Cuenta"
+                    style="background:transparent;border:none;cursor:pointer;padding:6px;">
+                <ion-icon name="person-circle-outline" style="font-size:1.9rem;"></ion-icon>
+            </button>
+
+            <div id="userDropdown" class="user-dropdown" role="menu"
+                 style="display:none; position:absolute; right:0; margin-top:8px; background:#fff; border:1px solid #ddd; box-shadow:0 4px 12px rgba(0,0,0,.08); min-width:180px; z-index:50; padding:8px; border-radius:4px;">
+                <div class="user-name" style="padding:6px 8px; font-weight:600; color:#333;"
+                     th:text="${session.usuarioNombre}">Usuario
+                </div>
+                <hr style="margin:6px 0;">
+                <a th:href="@{/perfil}" role="menuitem"
+                   style="display:block; padding:6px 8px; color:#333; text-decoration:none;">Perfil</a>
+                <a th:if="${session.usuarioEsAdmin}"
+                   th:href="@{/proveedor}"
+                   role="menuitem"
+                   style="display:block; padding:6px 8px; color:#333; text-decoration:none;">
+                    R. Proveedor
+                </a>
+                <a th:if="${session.usuarioEsAdmin}"
+                   th:href="@{/producto}"
+                   role="menuitem"
+                   style="display:block; padding:6px 8px; color:#333; text-decoration:none;">
+                    R. Productos
+                </a>
+                <a th:if="${session.usuarioEsAdmin}"
+                   th:href="@{/stock}"
+                   role="menuitem"
+                   style="display:block; padding:6px 8px; color:#333; text-decoration:none;">
+                    Consultar Stock
+                </a>
+                <a th:if="${session.usuarioEsAdmin}"
+                   th:href="@{/pedido}"
+                   role="menuitem"
+                   style="display:block; padding:6px 8px; color:#333; text-decoration:none;">
+                    R.Pedido
+                </a>
+                <a th:if="${session.usuarioEsAdmin}"
+                   th:href="@{/compra}"
+                   role="menuitem"
+                   style="display:block; padding:6px 8px; color:#333; text-decoration:none;">
+                    Reporte Compra
+                </a>
+                <a th:if="${session.usuarioEsAdmin}"
+                   th:href="@{/registro_compra}"
+                   role="menuitem"
+                   style="display:block; padding:6px 8px; color:#333; text-decoration:none;">
+                    R. Compras
+                </a>
+
+                <a th:href="@{/logout}" role="menuitem"
+                   style="display:block; padding:6px 8px; color:#c00; text-decoration:none;">Cerrar sesión</a>
+            </div>
         </div>
-        <nav class="navigation">
-            <a href="/html/carta.html">Nuestra Carta</a>
-            <a href="/html/promociones.html">Promociones</a>
-            <a href="/html/reserva.html">Reserva</a>
-            <a href="/html/sobre_nosotros.html">Sobre Nosotros</a>
-            <a href="/html/ubicacion.html">Ubicacion</a>
-            <button class="btnLogin">Login</button>
-        </nav>
-    </header>
-    <main class="reserva-contenedor">
-        <section class="formulario-reserva">
-            <h2>Reserva Formulario</h2>
-            <form action="#" method="post">
-                <label for="Nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" required>
+    </nav>
+</header>
 
-                <label for="Nombre">Teléfono:</label>
-                <input type="tel" id="telefono" name="telefono" required>
+<main class="reserva-contenedor">
+    <section class="formulario-reserva">
+        <h2>Reserva Formulario</h2>
 
-                <label for="Fecha">Fecha:</label>
-                <input type="date" id="fecha" name="fecha" required>
+        <div th:if="${param.exito}" class="alert alert-info">Reserva registrada con éxito.</div>
 
-                <label for="Hora">Hora:</label>
-                <input type="time" name="hora" id="hora" required>
+        <form th:action="@{/reserva}" th:object="${reserva}" method="post">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" th:if="${_csrf != null}" />
 
-                <label for="personas">N° de Personas:</label>
-                <input type="number" id="personas" name="personas" min="1" max="15" required>
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" th:field="*{nombre}" required>
 
-                <button type="submit" class="btnReserva">Reservar</button>
-                <button type="submit" class="btncancelar">Cancelar</button>
-            </form>
-        </section>
-        <section class="imagen-reserva">
-            <img src="/img/reserva.png" alt="img-reserva">
-        </section>
-    </main>
-    <footer class="footer">
-  <div class="footer-container">
+            <label for="fecha_reserva">Fecha:</label>
+            <input type="date" id="fecha_reserva" th:field="*{fecha_reserva}" required>
 
-    <div class="footer-col">
-      <h3>El Olímpico</h3>
-      <ul>
-        <li><a href="/html/sobre_nosotros.html">Historia</a></li>
-        <li><a href="/html/sobre_nosotros.html">Misión</a></li>
-        <li><a href="/html/sobre_nosotros.html">Visión</a></li>
-        <li><a href="/html/sobre_nosotros.html">El Olímpico Sostenible</a></li>
-      </ul>
+            <label for="hora_reserva">Hora:</label>
+            <input type="time" id="hora_reserva" th:field="*{hora_reserva}" required>
+
+            <label for="personas">N° de Personas:</label>
+            <input type="number" id="personas" th:field="*{personas}" min="1" max="15" required>
+
+            <button type="submit" class="btnReserva">Reservar</button>
+            <button type="reset" class="btncancelar">Cancelar</button>
+        </form>
+    </section>
+
+    <section class="imagen-reserva">
+        <img src="/img/reserva.png" alt="img-reserva">
+    </section>
+</main>
+
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-col">
+            <h3>El Olímpico</h3>
+            <ul>
+                <li><a href="/html/sobre_nosotros.html">Historia</a></li>
+                <li><a href="/html/sobre_nosotros.html">Misión</a></li>
+                <li><a href="/html/sobre_nosotros.html">Visión</a></li>
+                <li><a href="/html/sobre_nosotros.html">El Olímpico Sostenible</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h3>Servicios</h3>
+            <ul>
+                <li><a href="#">Delivery</a></li>
+                <li><a href="#">Reservas</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h3>Métodos de Pago</h3>
+            <div class="metodos-pago">
+                <img src="/img/visa.png" alt="Visa">
+                <img src="/img/yape.png" alt="Yape">
+                <img src="/img/bbva.png" alt="BBVA">
+                <img src="/img/efectivo.png" alt="Efectivo">
+            </div>
+        </div>
+
+        <div class="footer-col">
+            <h3>Contáctanos</h3>
+            <ul>
+                <li><a href="#">Escríbenos</a></li>
+                <li><a href="#">Trabaja con nosotros</a></li>
+                <li><a href="#">Libro de Reclamaciones</a></li>
+            </ul>
+        </div>
     </div>
 
-    <div class="footer-col">
-      <h3>Servicios</h3>
-      <ul>
-        <li><a href="#">Delivery</a></li>
-        <li><a href="#">Reservas</a></li>
-      </ul>
+    <div class="footer-bottom">
+        <p>© 2025 El Olímpico - Todos los derechos reservados</p>
     </div>
-
-    <div class="footer-col">
-      <h3>Métodos de Pago</h3>
-      <div class="metodos-pago">
-        <img src="/img/visa.png" alt="Visa">
-        <img src="/img/yape.png" alt="Yape">
-        <img src="/img/bbva.png" alt="BBVA">
-        <img src="/img/efectivo.png" alt="Efectivo">
-      </div>
-    </div>
-
-    <div class="footer-col">
-      <h3>Contáctanos</h3>
-      <ul>
-        <li><a href="#">Escríbenos</a></li>
-        <li><a href="#">Trabaja con nosotros</a></li>
-        <li><a href="#">Libro de Reclamaciones</a></li>
-      </ul>
-    </div>
-
-  </div>
-  <div class="footer-bottom">
-    <p>© 2025 El Olímpico - Todos los derechos reservados</p>
-  </div>
 </footer>
 
-    <a href="https://api.whatsapp.com/send?phone=51960743169&text=Hola%20Cevichería%20El%20Olímpico,%20quisiera%20hacer%20una%20consulta!" 
+<a href="https://api.whatsapp.com/send?phone=51960743169&text=Hola%20Cevichería%20El%20Olímpico,%20quisiera%20hacer%20una%20consulta!"
    class="whatsapp-float" target="_blank" rel="noopener" aria-label="Consultar dudas por WhatsApp">
     <ion-icon name="logo-whatsapp"></ion-icon>
-    </a>
+</a>
 
-    <a href="https://www.instagram.com/alferox01/" 
-   class="instagram-float" target="_blank" rel="noopener" 
-   aria-label="Visítanos en Instagram">
+<a href="https://www.instagram.com/alferox01/" class="instagram-float" target="_blank" rel="noopener" aria-label="Visítanos en Instagram">
     <ion-icon name="logo-instagram"></ion-icon>
 </a>
 
-<a href="https://www.facebook.com/sebastian.fernandez.882059" 
-   class="facebook-float" target="_blank" rel="noopener" aria-label="Síguenos en Facebook">
+<a href="https://www.facebook.com/sebastian.fernandez.882059" class="facebook-float" target="_blank" rel="noopener" aria-label="Síguenos en Facebook">
     <ion-icon name="logo-facebook"></ion-icon>
 </a>
 
-<a href="https://x.com/AlonsoMedr31941" 
-   class="twitter-float" target="_blank" rel="noopener" aria-label="Síguenos en Twitter">
+<a href="https://x.com/AlonsoMedr31941" class="twitter-float" target="_blank" rel="noopener" aria-label="Síguenos en Twitter">
     <ion-icon name="logo-twitter"></ion-icon>
 </a>
 
-    <script src="/js/script_reserva.js"></script>
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script src="/js/script_reserva.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
-
 </html>

@@ -1,6 +1,5 @@
 package com.olimpico.proyectoOlimpico.services;
 
-import com.olimpico.proyectoOlimpico.model.DetInveProd;
 import com.olimpico.proyectoOlimpico.model.DetPedido;
 import com.olimpico.proyectoOlimpico.repo.DetPedidoRepository;
 import org.springframework.stereotype.Service;

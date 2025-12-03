@@ -21,11 +21,6 @@ public class PaginaController {
         return "promociones"; // templates/promociones.html
     }
 
-    @GetMapping("/reserva")
-    public String reserva() {
-        return "reserva"; // templates/reserva.html
-    }
-
     @GetMapping("/sobre_nosotros")
     public String sobreNosotros() {
         return "sobre_nosotros"; // templates/sobre_nosotros.html
@@ -34,6 +29,11 @@ public class PaginaController {
     @GetMapping("/ubicacion")
     public String ubicacion() {
         return "ubicacion"; // templates/ubicacion.html
+    }
+
+    @GetMapping("/consulta_stock")
+    public  String consultaStock() {
+        return "consulta_stock"; // templates/consulta_stock.html
     }
 
 }

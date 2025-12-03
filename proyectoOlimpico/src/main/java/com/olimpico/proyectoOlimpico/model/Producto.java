@@ -13,7 +13,7 @@ import java.util.List;
 public class Producto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_producto")
+    @Column(name = "id_producto", columnDefinition = "BIGINT UNSIGNED")
     private Long id_producto;
 
     private String nombre_producto;
@@ -37,9 +37,6 @@ public class Producto {
 
     @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
     private List<DetCarrito> detCarritos;
-
-    @OneToMany(mappedBy = "producto" , cascade = CascadeType.ALL)
-    private List<DetInveProd> detallesInventario;
 
     @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
     private List<DetPedido> detallesPedido;

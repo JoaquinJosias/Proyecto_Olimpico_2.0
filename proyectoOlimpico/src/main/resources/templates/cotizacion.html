@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="es">
+<head><!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Registro de Cotización</title>
+        <link rel="stylesheet" href="/css/cotizacion.css">
+        <style>
+            /* estilos mínimos para facilitar pruebas */
+            .container{max-width:800px;margin:20px auto;font-family:Arial,Helvetica,sans-serif}
+            .row{display:flex;gap:12px}
+            .form-group{flex:1;display:flex;flex-direction:column;margin-bottom:8px}
+            #productosContainer .producto-row{display:flex;gap:8px;margin-bottom:6px;align-items:center}
+            .producto-row input, .producto-row select{padding:6px}
+            .btn-secondary, .btn-primary{padding:8px 12px;cursor:pointer}
+            .btn-secondary{background:#eee;border:1px solid #ccc}
+            .btn-primary{background:#2b7cff;color:#fff;border:none}
+            .totales{margin-top:12px}
+            .total-item{display:flex;justify-content:space-between;padding:4px 0}
+        </style>
+    </head>
+    <body>
+
+    <div class="container">
+        <h2>Formulario de Cotización</h2>
+        <p class="subtitle">Registra la cotización de un proveedor para comparar precios.</p>
+
+        <form id="formCotizacion">
+
+            <div class="form-group">
+                <label>Proveedor</label>
+                <select id="proveedor" required>
+                    <option value="">Seleccione...</option>
+                </select>
+            </div>
+
+            <div class="row">
+                <div class="form-group">
+                    <label>Fecha de cotización</label>
+                    <input type="date" id="fecha" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Vigencia</label>
+                    <input type="date" id="vigencia" required>
+                </div>
+            </div>
+
+            <hr>
+
+            <h3>Productos cotizados (solo local)</h3>
+
+            <div id="productosContainer"></div>
+
+            <button type="button" id="btnAgregar" class="btn-secondary">Agregar producto</button>
+
+            <hr>
+
+            <div class="totales">
+                <div class="total-item">
+                    <span>Subtotal:</span>
+                    <span id="lblSubtotal">S/ 0.00</span>
+                </div>
+
+                <div class="total-item">
+                    <span>IGV (18%):</span>
+                    <span id="lblIGV">S/ 0.00</span>
+                </div>
+
+                <div class="total-item total-final">
+                    <strong>Total:</strong>
+                    <strong id="lblTotal">S/ 0.00</strong>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-primary">Registrar Cotización</button>
+            <p id="mensaje"></p>
+
+        </form>
+    </div>
+
+    <script>
+        /* Lista local de proveedores y productos (no se guardan en servidor) */
+        const proveedores = [
+          { id: 'PR001', nombre: 'Proveedor A' },
+          { id: 'PR002', nombre: 'Proveedor B' },
+          { id: 'PR003', nombre: 'Proveedor C' }
+        ];
+
+        const productosCatalogo = [
+          { id: 'P001', nombre: 'Producto 1', precio: 10.50 },
+          { id: 'P002', nombre: 'Producto 2', precio: 25.00 },
+          { id: 'P003', nombre: 'Producto 3', precio: 7.75 }
+        ];
+
+        const IVA_RATE = 0.18;
+
+        document.addEventListener('DOMContentLoaded', () => {
+          const selectProv = document.getElementById('proveedor');
+          proveedores.forEach(p => {
+            const opt = document.createElement('option');
+            opt.value = p.id;
+            opt.textContent = p.nombre;
+            selectProv.appendChild(opt);
+          });
+
+          const productosContainer = document.getElementById('productosContainer');
+          const btnAgregar = document.getElementById('btnAgregar');
+          const lblSubtotal = document.getElementById('lblSubtotal');
+          const lblIGV = document.getElementById('lblIGV');
+          const lblTotal = document.getElementById('lblTotal');
+          const mensaje = document.getElementById('mensaje');
+
+          // Estado local de productos añadidos (solo cliente)
+          const productos = [];
+
+          function formatMoney(v) {
+            return 'S/ ' + v.toFixed(2);
+          }
+
+          function recalcular() {
+            const subtotal = productos.reduce((s,p) => s + (p.precio * p.cantidad), 0);
+            const igv = subtotal * IVA_RATE;
+            const total = subtotal + igv;
+            lblSubtotal.textContent = formatMoney(subtotal);
+            lblIGV.textContent = formatMoney(igv);
+            lblTotal.textContent = formatMoney(total);
+          }
+
+          function crearFilaProducto(index) {
+            const p = productos[index];
+            const row = document.createElement('div');
+            row.className = 'producto-row';
+            row.dataset.index = index;
+
+            const sel = document.createElement('select');
+            productosCatalogo.forEach(pc => {
+              const o = document.createElement('option');
+              o.value = pc.id;
+              o.textContent = pc.nombre;
+              if (pc.id === p.productoId) o.selected = true;
+              sel.appendChild(o);
+            });
+
+            const qty = document.createElement('input');
+            qty.type = 'number';
+            qty.min = '1';
+            qty.value = p.cantidad;
+            qty.style.width = '80px';
+
+            const precio = document.createElement('input');
+            precio.type = 'number';
+            precio.step = '0.01';
+            precio.min = '0';
+            precio.value = p.precio;
+            precio.style.width = '100px';
+
+            const subtotalSpan = document.createElement('span');
+            subtotalSpan.textContent = formatMoney(p.precio * p.cantidad);
+            subtotalSpan.style.minWidth = '80px';
+            subtotalSpan.style.display = 'inline-block';
+
+            const btnDel = document.createElement('button');
+            btnDel.type = 'button';
+            btnDel.textContent = 'Eliminar';
+            btnDel.className = 'btn-secondary';
+
+            // eventos
+            sel.addEventListener('change', () => {
+              const selId = sel.value;
+              const prod = productosCatalogo.find(x => x.id === selId);
+              p.productoId = selId;
+              p.precio = prod ? prod.precio : 0;
+              precio.value = p.precio;
+              subtotalSpan.textContent = formatMoney(p.precio * p.cantidad);
+              recalcular();
+            });
+
+            qty.addEventListener('input', () => {
+              const val = Math.max(1, Number(qty.value) || 1);
+              p.cantidad = val;
+              qty.value = val;
+              subtotalSpan.textContent = formatMoney(p.precio * p.cantidad);
+              recalcular();
+            });
+
+            precio.addEventListener('input', () => {
+              const val = Math.max(0, Number(precio.value) || 0);
+              p.precio = val;
+              precio.value = val.toFixed(2);
+              subtotalSpan.textContent = formatMoney(p.precio * p.cantidad);
+              recalcular();
+            });
+
+            btnDel.addEventListener('click', () => {
+              const idx = Number(row.dataset.index);
+              productos.splice(idx, 1);
+              renderProductos();
+              recalcular();
+            });
+
+            row.appendChild(sel);
+            row.appendChild(qty);
+            row.appendChild(precio);
+            row.appendChild(subtotalSpan);
+            row.appendChild(btnDel);
+
+            return row;
+          }
+
+          function renderProductos() {
+            productosContainer.innerHTML = '';
+            productos.forEach((_, i) => {
+              productosContainer.appendChild(crearFilaProducto(i));
+            });
+          }
+
+          btnAgregar.addEventListener('click', () => {
+            // Por defecto agregar primer producto del catálogo
+            const prod = productosCatalogo[0];
+            productos.push({
+              productoId: prod.id,
+              cantidad: 1,
+              precio: prod.precio
+            });
+            renderProductos();
+            recalcular();
+          });
+
+          // envío de cotización: solo se guarda la cabecera (no productos)
+          document.getElementById('formCotizacion').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            mensaje.textContent = '';
+            const proveedorId = selectProv.value;
+            if (!proveedorId) {
+              mensaje.textContent = 'Seleccione un proveedor.';
+              mensaje.style.color = 'red';
+              return;
+            }
+            const fecha = document.getElementById('fecha').value;
+            const vigencia = document.getElementById('vigencia').value;
+            if (!fecha || !vigencia) {
+              mensaje.textContent = 'Complete las fechas.';
+              mensaje.style.color = 'red';
+              return;
+            }
+
+            // calcular totales finales (asegurar valores actuales)
+            const subtotal = productos.reduce((s,p) => s + (p.precio * p.cantidad), 0);
+            const igv = subtotal * IVA_RATE;
+            const total = subtotal + igv;
+
+            // DTO enviado al servidor: solo datos de la cotización
+            const dto = {
+              idCotizacion: null,
+              idProveedor: proveedorId,
+              fecha: fecha,
+              vigencia: vigencia,
+              subtotal: Number(subtotal.toFixed(2)),
+              igv: Number(igv.toFixed(2)),
+              total: Number(total.toFixed(2))
+              // NOTA: no se envían los productos para persistencia según petición
+            };
+
+            try {
+              const resp = await fetch('/api/cotizaciones', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(dto)
+              });
+
+              if (resp.ok) {
+                mensaje.textContent = 'Cotización registrada correctamente.';
+                mensaje.style.color = 'green';
+                // limpiar formulario y estado local de productos
+                document.getElementById('formCotizacion').reset();
+                productos.length = 0;
+                renderProductos();
+                recalcular();
+              } else {
+                const txt = await resp.text();
+                mensaje.textContent = 'Error: ' + (txt || resp.statusText);
+                mensaje.style.color = 'red';
+              }
+            } catch (err) {
+              mensaje.textContent = 'Error de conexión.';
+              mensaje.style.color = 'red';
+            }
+          });
+
+          // inicialización: opcional agregar una fila vacía
+          // btnAgregar.click();
+        });
+    </script>
+
+    </body>
+    </html>

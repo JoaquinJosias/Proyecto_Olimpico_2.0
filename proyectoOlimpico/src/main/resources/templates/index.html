@@ -52,7 +52,7 @@
                     R. Productos
                 </a>
                 <a th:if="${session.usuarioEsAdmin}"
-                   th:href="@{/stock}"
+                   th:href="@{/consulta_stock}"
                    role="menuitem"
                    style="display:block; padding:6px 8px; color:#333; text-decoration:none;">
                     Consultar Stock
@@ -75,6 +75,13 @@
                    style="display:block; padding:6px 8px; color:#333; text-decoration:none;">
                     R. Compras
                 </a>
+                <a th:if="${session.usuarioEsAdmin}"
+                   th:href="@{/cotizacion}"
+                   role="menuitem"
+                   style="display:block; padding:6px 8px; color:#333; text-decoration:none;">
+                    Cotizacion de Compra
+                </a>
+                
                 <a th:href="@{/logout}" role="menuitem"
                    style="display:block; padding:6px 8px; color:#c00; text-decoration:none;">Cerrar sesión</a>
             </div>

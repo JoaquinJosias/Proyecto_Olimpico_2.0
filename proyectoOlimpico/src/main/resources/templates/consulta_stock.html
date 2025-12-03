@@ -1,54 +1,72 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/Stock.css">
     <title>Consulta Stock Disponible</title>
-</head>
-<body>
-    <h1>Bienvenido al Stock</h1>
-    <div class="stock-layout">
-    <div class="stock-contenedor">
-        <h2>Consulta Stock</h2>
-        <form action="/consultar-stock" method="POST" id="stockForm">
-            <label for="producto">Producto:</label>
-            <input type="text" id="producto" name="producto" placeholder="Ej.papas, camote, pescado, leche" required>
-            <label for="categoria">Categoria: </label>
-            <select id="categoria" name="categoria">
-                <option value="pescados">Pescados</option>
-                <option value="bebidas">Bebidas</option>
-                <option value="mariscos">Mariscos</option>
-                <option value="lacteos">Lacteos</option>
-                <option value="frutas">Frutas</option>
-                <option value="ingredientes">Condimentos y Otros</option>
-                <option value="congelados">Congelados</option>
-                <option value="Otros"></option>
-            </select>
-            <label for="Marca">Marca o Empresa:</label>
-            <input type="text" id="marca" name="marca" placeholder="Ej. Cristal, Gloria,Inka Cola " required>
-            
-            <label for="precio_venta">Precio de Venta:</label>
-            <input type="number" id="precio_venta" name="precio_venta" min="0" step="0.01" required>
-            
-            <label for="cantidad">Cantidad Disponible:</label>
-            <input type="number" name="cantidad" id="cantidad" min="0" required>
 
-            <button type="submit" class="btnConsultar">Consultar</button>
-            <button type="submit" class="btnBorrar">Borrar</button> 
+</head>
+
+<body>
+<h1>Stock de Cevichería</h1>
+
+<div class="stock-layout">
+
+    <div class="stock-contenedor">
+        <h2>Filtros de Búsqueda</h2>
+
+        <form id="stockForm">
+
+            <label for="producto">Producto:</label>
+            <input type="text" id="producto" placeholder="Ej. pescado, cebolla, limón">
+
+            <label for="categoria">Categoría:</label>
+            <select id="categoria">
+                <option value="">Todos</option>
+                <option value="pescados">Pescados</option>
+                <option value="mariscos">Mariscos</option>
+                <option value="vegetales">Vegetales</option>
+                <option value="bebidas">Bebidas</option>
+                <option value="lacteos">Lácteos</option>
+                <option value="condimentos">Condimentos y Otros</option>
+            </select>
+
+            <label for="marca">Marca / Empresa:</label>
+            <input type="text" id="marca" placeholder="Ej. Gloria, San Fernando">
+
+            <button type="button" id="btnConsultar" class="btnConsultar">Consultar</button>
+            <button type="button" id="btnBorrar" class="btnBorrar">Borrar</button>
+
         </form>
+
         <div id="mensaje" class="mensaje"></div>
     </div>
+
     <div class="resultados">
-            <h2>Resultados de la búsqueda</h2>
-            <p>Stock</p>
-        </div>
-        </div>
+        <h2>Stock Disponible</h2>
+
+        <table id="tablaStock">
+            <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Categoría</th>
+                <th>Marca</th>
+                <th>Precio Venta</th>
+                <th>Cantidad</th>
+            </tr>
+            </thead>
+
+            <tbody id="cuerpoTabla">
+            <!-- Se llenará automáticamente con JS -->
+            </tbody>
+        </table>
+
     </div>
 
-<script src="/css/script_stock.js"></script>
+</div>
 
-    
+<script src="/js/script_stock.js"></script>
+
 </body>
-
 </html>
